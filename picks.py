@@ -93,6 +93,42 @@ def scan_todays_game_tickers():
     return unique_tickers
 
 
+# Teams that are almost always heavy favorites — if they're priced UNDER 45c,
+# something is wrong (injury, rest game, etc). Skip those markets entirely.
+STRONG_TEAMS = {
+    # NBA elite
+    "BOS", "OKC", "DEN", "LAC", "HOU", "CLE", "NYK", "MIN",
+    # MLB perennial contenders
+    "LAD", "NYY", "ATL", "HOU", "PHI", "NYM",
+    # NHL powerhouses
+    "FLA", "DAL", "COL", "CAR", "NYR", "WPG",
+    # NCAA bluebloods
+    "DUKE", "KU", "GONZ", "CONN", "UK", "UCLA",
+}
+
+
+def is_suspicious_market(ticker: str, yes: float) -> bool:
+    """
+    Returns True if a strong team is priced suspiciously low (likely injured/resting).
+    We should skip these — the market knows something we don't.
+    """
+    parts = ticker.split("-")
+    if len(parts) < 3:
+        return False
+    team_code = parts[-1].upper()
+    import re
+    team_code = re.sub(r'\d+$', '', team_code)
+    # If a known strong team is the pick but priced under 45c, skip it
+    if team_code in STRONG_TEAMS and yes < 0.45:
+        print(f"  Skipping suspicious market: {ticker} (strong team at only {int(yes*100)}c)")
+        return True
+    # Also skip near-coinflips (50-55c) for strong teams — not worth the risk
+    if team_code in STRONG_TEAMS and yes < 0.58:
+        print(f"  Skipping low-confidence strong team: {ticker} ({int(yes*100)}c)")
+        return True
+    return False
+
+
 def score_pick(market: dict) -> float:
     """
     Score a market for pick-worthiness.
@@ -102,8 +138,12 @@ def score_pick(market: dict) -> float:
     vol = float(market.get("volume_fp", "0") or 0)
     ticker = market.get("ticker", "")
 
-    # Only consider clear favorites 55c-93c (not near-locks, not coinflips)
-    if yes < 0.55 or yes > 0.93:
+    # Only consider clear favorites 58c-93c (not near-locks, not coinflips)
+    if yes < 0.58 or yes > 0.93:
+        return 0
+
+    # Skip suspicious markets where something seems off
+    if is_suspicious_market(ticker, yes):
         return 0
 
     # Game winners preferred over spreads
