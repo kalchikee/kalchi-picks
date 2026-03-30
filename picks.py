@@ -861,12 +861,9 @@ def build_parlay(all_picks: list) -> dict | None:
     - Canonical event key prevents two legs from the same game
     - Kelly-inspired stake sizing (quarter-Kelly, $2–$10 cap)
     """
-    def _event_key(pick):
-        # rsplit on the date segment so both sides of the same game share a key
-        parts = pick["ticker"].split("-")
-        return "-".join(parts[:2]) if len(parts) >= 2 else pick["ticker"]
-
     # ── Step 1: build pool with per-leg true-win estimates ───────────────────
+    # Note: get_top_picks() already deduplicates by event_ticker (one pick per
+    # game), so no further event dedup is needed here.
     base_eligible = [
         p for p in all_picks
         if 0.65 <= p["yes"] <= 0.80
@@ -910,11 +907,6 @@ def build_parlay(all_picks: list) -> dict | None:
                 trio = [pool[i], pool[j], pool[k]]
                 picks_t = [t[0] for t in trio]
                 tps_t   = [t[1] for t in trio]
-
-                # No two legs from the same game
-                events = {_event_key(p) for p in picks_t}
-                if len(events) < 3:
-                    continue
 
                 true_combined = tps_t[0] * tps_t[1] * tps_t[2]
                 avg_score     = sum(p["score"] for p in picks_t) / 3
