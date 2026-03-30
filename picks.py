@@ -2,6 +2,7 @@ import base64
 import re
 import time
 import datetime
+import json
 import os
 import requests
 from cryptography.hazmat.primitives import hashes, serialization
@@ -12,6 +13,26 @@ PRIVATE_KEY_PEM = os.environ["KALSHI_PRIVATE_KEY"]
 
 BASE_URL = "https://api.elections.kalshi.com/trade-api/v2"
 API_PREFIX = "/trade-api/v2"
+
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+
+
+def _load_data_file(filename: str):
+    path = os.path.join(DATA_DIR, filename)
+    if os.path.exists(path):
+        try:
+            with open(path) as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return None
+
+
+def _save_data_file(filename: str, data):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    path = os.path.join(DATA_DIR, filename)
+    with open(path, "w") as f:
+        json.dump(data, f, indent=2)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -317,6 +338,7 @@ def get_todays_game_data(sport: str, league: str) -> dict:
                     "espn_spread": espn_spread,
                     "opponent_abbr": None,
                     "game_hour_et": game_hour_et,
+                    "event_id": event.get("id"),
                 }
 
             abbrs = list(teams_data.keys())
@@ -420,6 +442,102 @@ def get_team_injuries(sport: str, league: str) -> dict:
     return injuries
 
 
+def get_mlb_probable_pitchers(event_id: str) -> dict:
+    """
+    Returns {"home": {"name", "era", "whip"}, "away": {...}} for today's
+    MLB probable starters using ESPN's core probables endpoint.
+    Fails silently — returns empty dicts if unavailable.
+    """
+    key = f"pitchers_{event_id}"
+    if key in _cache:
+        return _cache[key]
+    result = {"home": {}, "away": {}}
+    try:
+        url = (
+            f"https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb"
+            f"/events/{event_id}/competitions/{event_id}/probables"
+        )
+        data = _espn_get(url)
+        for item in data.get("items", []):
+            side = item.get("homeAway", "")
+            if side not in result:
+                continue
+            # Fetch athlete name
+            athlete_ref = (item.get("athlete") or {}).get("$ref", "")
+            name = "Unknown"
+            if athlete_ref:
+                ath = _espn_get(athlete_ref)
+                name = ath.get("displayName", "Unknown")
+            # Fetch season ERA/WHIP from stats $ref
+            era = whip = None
+            stats_ref = (item.get("statistics") or {}).get("$ref", "")
+            if stats_ref:
+                sdata = _espn_get(stats_ref)
+                for cat in (sdata.get("splits") or {}).get("categories", []):
+                    for stat in cat.get("stats", []):
+                        n = stat.get("name", "")
+                        if n == "ERA":
+                            era = stat.get("value")
+                        elif n == "WHIP":
+                            whip = stat.get("value")
+            result[side] = {"name": name, "era": era, "whip": whip}
+    except Exception:
+        pass
+    _cache[key] = result
+    return result
+
+
+def get_head_to_head(sport: str, league: str, team_id: str, opp_abbr: str) -> dict:
+    """
+    Scans this season's completed schedule for games vs today's opponent.
+    Returns {"h2h_wins": int, "h2h_losses": int, "h2h_win_pct": float|None}.
+    Reuses the already-cached schedule — no extra HTTP call.
+    """
+    key = f"h2h_{sport}_{league}_{team_id}_{opp_abbr}"
+    if key in _cache:
+        return _cache[key]
+    url = f"https://site.api.espn.com/apis/site/v2/sports/{sport}/{league}/teams/{team_id}/schedule"
+    data = _espn_get(url)   # always cached from get_team_recent_form
+    wins = losses = 0
+    for event in data.get("events", []):
+        comp = (event.get("competitions") or [{}])[0]
+        if not comp.get("status", {}).get("type", {}).get("completed"):
+            continue
+        opp_in_game = any(
+            c.get("team", {}).get("abbreviation", "").upper() == opp_abbr
+            for c in comp.get("competitors", [])
+        )
+        if not opp_in_game:
+            continue
+        for c in comp.get("competitors", []):
+            if str(c.get("team", {}).get("id")) == str(team_id):
+                if c.get("winner"):
+                    wins += 1
+                else:
+                    losses += 1
+    total = wins + losses
+    result = {
+        "h2h_wins": wins,
+        "h2h_losses": losses,
+        "h2h_games": total,
+        "h2h_win_pct": (wins / total) if total >= 2 else None,
+    }
+    _cache[key] = result
+    return result
+
+
+def get_line_movement(ticker: str, current_price: float) -> float:
+    """
+    Returns how many cents the Kalshi price has moved since yesterday's run.
+    Positive = price rose (sharp money piling in), negative = price fell.
+    """
+    yesterday = _load_data_file("prices.json") or {}
+    prev = (yesterday.get("prices") or {}).get(ticker)
+    if prev is None:
+        return 0.0
+    return round(current_price - prev, 3)
+
+
 def build_team_intel(ticker: str) -> dict:
     """
     Assemble complete intelligence for the team in a Kalshi ticker.
@@ -480,6 +598,25 @@ def build_team_intel(ticker: str) -> dict:
     else:
         intel["opp_injuries_out"] = []
         intel["opp_injuries_questionable"] = []
+
+    # ── Head-to-head record vs today's opponent ───────────────────────────
+    if team_id and opp_abbr:
+        h2h = get_head_to_head(sport, league, team_id, opp_abbr)
+        intel.update(h2h)
+
+    # ── MLB probable starting pitcher ─────────────────────────────────────
+    if league == "mlb":
+        event_id = game_data.get("event_id")
+        if event_id:
+            pitchers = get_mlb_probable_pitchers(str(event_id))
+            my_side = "home" if game_data.get("is_home") else "away"
+            opp_side = "away" if my_side == "home" else "home"
+            intel["starter_name"] = pitchers[my_side].get("name")
+            intel["starter_era"]  = pitchers[my_side].get("era")
+            intel["starter_whip"] = pitchers[my_side].get("whip")
+            intel["opp_starter_name"] = pitchers[opp_side].get("name")
+            intel["opp_starter_era"]  = pitchers[opp_side].get("era")
+            intel["opp_starter_whip"] = pitchers[opp_side].get("whip")
 
     # ── Timezone travel fatigue ────────────────────────────────────────────
     is_home = game_data.get("is_home", True)
@@ -578,6 +715,7 @@ def score_pick(market: dict, intel: dict) -> float:
     yes = float(market.get("yes_ask_dollars", "0") or 0)
     vol = float(market.get("volume_fp", "0") or 0)
     ticker = market.get("ticker", "")
+    line_move = get_line_movement(ticker, yes)
 
     # Hard cap at 85¢: above this the risk/reward is too poor.
     # Your own history: 90¢+ bets → -$25.79 on $868 invested (-3% ROI).
@@ -662,12 +800,16 @@ def score_pick(market: dict, intel: dict) -> float:
     elif days_rest >= 3:
         score *= 1.05
 
-    # 6. Home court advantage
+    # 6. Home advantage — sport-specific (NBA biggest, MLB smallest)
+    # NBA home ~60%, NHL ~55%, MLB ~54%, CBB ~67%
+    _home_mult = {"nba": 1.10, "nhl": 1.06, "mlb": 1.04, "mens-college-basketball": 1.14}
+    _away_mult = {"nba": 0.92, "nhl": 0.96, "mlb": 0.97, "mens-college-basketball": 0.88}
+    _league = intel.get("league", "")
     is_home = intel.get("is_home")
     if is_home is True:
-        score *= 1.07
+        score *= _home_mult.get(_league, 1.07)
     elif is_home is False:
-        score *= 0.95
+        score *= _away_mult.get(_league, 0.95)
 
     # 7. Opponent on B2B (their fatigue = our edge)
     if intel.get("opp_back_to_back"):
@@ -785,6 +927,52 @@ def score_pick(market: dict, intel: dict) -> float:
             score *= 0.95
         elif wind_mph >= 20 and is_home:
             score *= 1.05   # home team knows the park, benefits slightly
+
+    # 22. Head-to-head record vs today's opponent (season H2H)
+    h2h_wp = intel.get("h2h_win_pct")
+    h2h_games = intel.get("h2h_games", 0)
+    if h2h_wp is not None and h2h_games >= 2:
+        if h2h_wp >= 0.75:
+            score *= 1.12   # dominates this opponent
+        elif h2h_wp >= 0.60:
+            score *= 1.06
+        elif h2h_wp <= 0.25:
+            score *= 0.88   # historically struggles vs this team
+        elif h2h_wp <= 0.40:
+            score *= 0.94
+
+    # 23. Kalshi line movement since yesterday — rising price = sharp agreement
+    if line_move >= 0.06:
+        score *= 1.14   # strong sharp action in our direction
+    elif line_move >= 0.03:
+        score *= 1.07
+    elif line_move <= -0.06:
+        score *= 0.86   # market moving hard against this pick
+    elif line_move <= -0.03:
+        score *= 0.93
+
+    # 24. MLB starting pitcher ERA/WHIP
+    if intel_league == "mlb":
+        starter_era = intel.get("starter_era")
+        opp_era = intel.get("opp_starter_era")
+        if starter_era is not None:
+            if starter_era < 3.00:
+                score *= 1.16   # ace on the mound
+            elif starter_era < 3.75:
+                score *= 1.08
+            elif starter_era > 5.00:
+                score *= 0.83   # weak starter — fade risk
+            elif starter_era > 4.25:
+                score *= 0.92
+        if opp_era is not None:
+            if opp_era > 5.00:
+                score *= 1.12   # facing a weak pitcher
+            elif opp_era > 4.25:
+                score *= 1.06
+            elif opp_era < 3.00:
+                score *= 0.86   # facing an ace
+            elif opp_era < 3.75:
+                score *= 0.93
 
     return score
 
@@ -1059,6 +1247,123 @@ def scan_no_fades(n: int = 3) -> list:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# RESULT TRACKING & LINE MOVEMENT PERSISTENCE
+# ─────────────────────────────────────────────────────────────────────────────
+
+def save_todays_prices(picks: list):
+    """Persist today's Kalshi prices so tomorrow we can detect line movement."""
+    prices = {p["ticker"]: p["yes"] for p in picks}
+    _save_data_file("prices.json", {
+        "date": datetime.datetime.utcnow().strftime("%Y-%m-%d"),
+        "prices": prices,
+    })
+
+
+def save_picks_for_tracking(picks: list):
+    """Append today's picks to the running log for result checking tomorrow."""
+    today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    log = _load_data_file("picks_log.json") or []
+    for p in picks:
+        sport = ("NHL" if "NHL" in p["ticker"] else
+                 "NBA" if "NBA" in p["ticker"] else
+                 "MLB" if "MLB" in p["ticker"] else "NCAA")
+        log.append({
+            "date": today,
+            "ticker": p["ticker"],
+            "team": extract_pick(p["ticker"]),
+            "yes": p["yes"],
+            "sport": sport,
+            "result": None,
+            "profit": None,
+        })
+    _save_data_file("picks_log.json", log)
+
+
+def check_yesterday_results() -> list:
+    """
+    Fetch ESPN final scores for yesterday's picks and mark W/L in the log.
+    Returns the list of newly resolved entries.
+    """
+    log = _load_data_file("picks_log.json")
+    if not isinstance(log, list):
+        return []
+    yesterday_dt = datetime.datetime.utcnow() - datetime.timedelta(days=1)
+    yesterday     = yesterday_dt.strftime("%Y-%m-%d")
+    yesterday_espn = yesterday_dt.strftime("%Y%m%d")
+
+    pending = [e for e in log if e.get("date") == yesterday and e.get("result") is None]
+    if not pending:
+        return []
+
+    # Fetch final scores across all three sports
+    results_by_abbr: dict = {}
+    for sport, league in [("basketball", "nba"), ("baseball", "mlb"), ("hockey", "nhl")]:
+        url = f"https://site.api.espn.com/apis/site/v2/sports/{sport}/{league}/scoreboard"
+        data = _espn_get(url, {"dates": yesterday_espn})
+        for event in data.get("events", []):
+            for comp in event.get("competitions", []):
+                for c in comp.get("competitors", []):
+                    abbr = c.get("team", {}).get("abbreviation", "").upper()
+                    won  = c.get("winner", False)
+                    if abbr:
+                        results_by_abbr[abbr] = won
+
+    newly_resolved = []
+    for entry in log:
+        if entry.get("date") != yesterday or entry.get("result") is not None:
+            continue
+        parts = entry["ticker"].split("-")
+        if parts:
+            code = re.sub(r'\d+$', '', parts[-1].upper())
+            abbr = espn_abbr(code)
+            if abbr in results_by_abbr:
+                won = results_by_abbr[abbr]
+                entry["result"] = "W" if won else "L"
+                entry["profit"] = round((1 - entry["yes"]) if won else -entry["yes"], 3)
+                newly_resolved.append(entry)
+
+    if newly_resolved:
+        _save_data_file("picks_log.json", log)
+    return newly_resolved
+
+
+def get_roi_summary() -> dict | None:
+    """Return running ROI stats from the picks log."""
+    log = _load_data_file("picks_log.json")
+    if not isinstance(log, list):
+        return None
+    resolved = [e for e in log if e.get("result") is not None]
+    if not resolved:
+        return None
+
+    total   = len(resolved)
+    wins    = sum(1 for e in resolved if e["result"] == "W")
+    profit  = sum(e.get("profit", 0) for e in resolved)
+
+    by_sport: dict = {}
+    for e in resolved:
+        s = e.get("sport", "?")
+        if s not in by_sport:
+            by_sport[s] = {"bets": 0, "wins": 0}
+        by_sport[s]["bets"] += 1
+        if e["result"] == "W":
+            by_sport[s]["wins"] += 1
+
+    recent = sorted(resolved, key=lambda x: x.get("date", ""), reverse=True)[:30]
+    r_wins = sum(1 for e in recent if e["result"] == "W")
+
+    return {
+        "total_bets":  total,
+        "wins":        wins,
+        "win_rate":    wins / total,
+        "total_profit": profit,
+        "by_sport":    by_sport,
+        "last_30":     {"bets": len(recent), "wins": r_wins,
+                        "win_rate": r_wins / len(recent) if recent else 0},
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # OUTPUT: FORMATTING & DELIVERY
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -1214,6 +1519,25 @@ def build_intel_bullets(intel: dict) -> list[str]:
     if wind and wind >= 15:
         bullets.append(f"💨 {int(wind)} mph wind at ballpark")
 
+    # MLB starting pitcher
+    starter = intel.get("starter_name")
+    starter_era = intel.get("starter_era")
+    opp_starter = intel.get("opp_starter_name")
+    opp_era = intel.get("opp_starter_era")
+    if starter and starter_era is not None:
+        icon = "🔥" if starter_era < 3.50 else ("⚠️" if starter_era > 4.75 else "⚾")
+        bullets.append(f"{icon} Starter: {starter} ({starter_era:.2f} ERA)")
+    if opp_starter and opp_era is not None:
+        icon = "😬" if opp_era > 4.75 else ("💪" if opp_era < 3.50 else "⚾")
+        bullets.append(f"{icon} Opp starter: {opp_starter} ({opp_era:.2f} ERA)")
+
+    # Head-to-head
+    h2h_wp = intel.get("h2h_win_pct")
+    h2h_games = intel.get("h2h_games", 0)
+    if h2h_wp is not None and h2h_games >= 2:
+        icon = "🔥" if h2h_wp >= 0.70 else ("⚠️" if h2h_wp <= 0.35 else "📊")
+        bullets.append(f"{icon} {int(h2h_wp*100)}% H2H vs this opponent ({h2h_games} games)")
+
     return bullets
 
 
@@ -1253,7 +1577,7 @@ def create_github_issue(title: str, body: str):
     print(f"Issue created: {resp.json()['html_url']}")
 
 
-def send_email(subject: str, picks: list, parlay: dict | None = None, fades: list | None = None):
+def send_email(subject: str, picks: list, parlay: dict | None = None, fades: list | None = None, roi: dict | None = None):
     resend_key = os.environ["RESEND_API_KEY"]
     today = datetime.datetime.utcnow().strftime("%B %d, %Y")
 
@@ -1386,6 +1710,45 @@ def send_email(subject: str, picks: list, parlay: dict | None = None, fades: lis
           </div>
         </div>"""
 
+    # ── ROI dashboard ────────────────────────────────────────────────────────
+    roi_html = ""
+    if roi:
+        sport_rows = ""
+        for sport, stats in roi["by_sport"].items():
+            wr = int(stats["wins"] / stats["bets"] * 100) if stats["bets"] else 0
+            sport_rows += (
+                f"<tr><td style='padding:4px 8px;'>{sport}</td>"
+                f"<td style='padding:4px 8px;text-align:center;'>{stats['wins']}/{stats['bets']}</td>"
+                f"<td style='padding:4px 8px;text-align:center;'>{wr}%</td></tr>"
+            )
+        l30 = roi["last_30"]
+        overall_wr = int(roi["win_rate"] * 100)
+        profit_color = "#27ae60" if roi["total_profit"] >= 0 else "#e74c3c"
+        profit_sign  = "+" if roi["total_profit"] >= 0 else ""
+        roi_html = f"""
+        <div style="margin-top:20px;background:#eaf4fb;border:1px solid #aed6f1;border-radius:8px;padding:14px;">
+          <div style="font-weight:bold;color:#1a5276;margin-bottom:8px;">📈 Your Running ROI</div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px;">
+            <div style="text-align:center;">
+              <div style="font-size:22px;font-weight:bold;color:#1a5276;">{overall_wr}%</div>
+              <div style="font-size:11px;color:#666;">All-time win rate</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:22px;font-weight:bold;color:{profit_color};">{profit_sign}{roi['total_profit']:.2f}¢</div>
+              <div style="font-size:11px;color:#666;">Total profit/loss</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:22px;font-weight:bold;color:#1a5276;">{int(l30['win_rate']*100)}%</div>
+              <div style="font-size:11px;color:#666;">Last 30 picks</div>
+            </div>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px;">
+            <tr style="background:#d6eaf8;"><th style="padding:4px 8px;text-align:left;">Sport</th>
+            <th style="padding:4px 8px;">W/L</th><th style="padding:4px 8px;">Win %</th></tr>
+            {sport_rows}
+          </table>
+        </div>"""
+
     # ── Rules reminder ────────────────────────────────────────────────────────
     rules_html = """
         <div style="margin-top:20px;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:14px;">
@@ -1418,6 +1781,7 @@ def send_email(subject: str, picks: list, parlay: dict | None = None, fades: lis
       </table>
       {parlay_html}
       {fades_html}
+      {roi_html}
       {rules_html}
       <div style="background:#f8f9fa;padding:10px;border-radius:0 0 8px 8px;font-size:11px;color:#aaa;margin-top:4px;">
         Auto-generated using live win rates, form, rest, and injury data. Not financial advice.
@@ -1441,20 +1805,36 @@ def send_email(subject: str, picks: list, parlay: dict | None = None, fades: lis
 if __name__ == "__main__":
     today = datetime.datetime.utcnow().strftime("%B %d, %Y")
 
-    # Fetch a wide pool — top picks + parlay pool + fades all share ESPN cache
+    # ── Step 1: resolve yesterday's results & compute ROI ─────────────────
+    resolved = check_yesterday_results()
+    if resolved:
+        print(f"Resolved {len(resolved)} picks from yesterday:")
+        for e in resolved:
+            print(f"  {e['team']}: {e['result']} ({'+' if e['profit'] >= 0 else ''}{e['profit']:.3f})")
+    roi = get_roi_summary()
+    if roi:
+        print(f"Running ROI: {int(roi['win_rate']*100)}% WR, {roi['total_profit']:+.2f}¢ profit on {roi['total_bets']} bets")
+
+    # ── Step 2: fetch today's picks ───────────────────────────────────────
     all_candidates = get_top_picks(15)
     picks = all_candidates[:5]
 
     parlay = build_parlay(all_candidates)
     if parlay:
         legs = parlay["legs"]
-        print(f"Parlay: {extract_pick(legs[0]['ticker'])} + {extract_pick(legs[1]['ticker'])} + {extract_pick(legs[2]['ticker'])} -> ${parlay['payout']:.2f} payout on $3")
+        print(f"Parlay: {extract_pick(legs[0]['ticker'])} + {extract_pick(legs[1]['ticker'])} + {extract_pick(legs[2]['ticker'])} -> ${parlay['payout']:.2f} payout on ${parlay['stake']:.2f}")
 
     fades = scan_no_fades(3)
     if fades:
         for f in fades:
             print(f"Fade: BUY NO on {extract_pick(f['ticker'])} at {int(f['no_ask']*100)}¢ (edge +{int(f['edge']*100)}pp)")
 
+    # ── Step 3: persist prices & picks for tomorrow ───────────────────────
+    if picks:
+        save_todays_prices(picks)
+        save_picks_for_tracking(picks)
+
+    # ── Step 4: deliver ───────────────────────────────────────────────────
     if not picks:
         print("No picks found for today.")
         body = "No qualifying markets found for today. Check back tomorrow!"
@@ -1467,4 +1847,4 @@ if __name__ == "__main__":
 
     create_github_issue(f"📊 Daily Picks — {today}", body)
     if picks:
-        send_email(f"🎯 Kalshi Top 5 Picks — {today}", picks, parlay=parlay, fades=fades)
+        send_email(f"🎯 Kalshi Top 5 Picks — {today}", picks, parlay=parlay, fades=fades, roi=roi)
