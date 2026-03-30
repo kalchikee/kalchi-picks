@@ -1577,7 +1577,7 @@ def create_github_issue(title: str, body: str):
     print(f"Issue created: {resp.json()['html_url']}")
 
 
-def send_email(subject: str, picks: list, parlay: dict | None = None, fades: list | None = None, roi: dict | None = None):
+def send_email(subject: str, picks: list, parlay: dict | None = None, fades: list | None = None, roi: dict | None = None, tennis_picks: list | None = None):
     resend_key = os.environ["RESEND_API_KEY"]
     today = datetime.datetime.utcnow().strftime("%B %d, %Y")
 
@@ -1749,6 +1749,47 @@ def send_email(subject: str, picks: list, parlay: dict | None = None, fades: lis
           </table>
         </div>"""
 
+    # ── Tennis picks section ──────────────────────────────────────────────────
+    tennis_html = ""
+    if tennis_picks:
+        tennis_rows = ""
+        for j, tp in enumerate(tennis_picks, 1):
+            edge_pct = int(tp["edge"] * 100)
+            model_pct = int(tp["model_prob"] * 100)
+            market_pct = int(tp["market_prob"] * 100)
+            bullet_items = "".join(f"<li style='margin:2px 0;'>{b}</li>" for b in tp["bullets"][:6])
+            tennis_rows += f"""
+            <tr style="border-bottom:1px solid #e8eaf6;">
+              <td style="padding:10px;text-align:center;font-weight:bold;font-size:16px;color:#3949ab;">{j}</td>
+              <td style="padding:10px;">
+                <div style="font-size:15px;font-weight:bold;">🎾 BET: {tp['player_a']} to WIN</div>
+                <div style="font-size:12px;color:#888;margin-top:2px;">{tp['title'][:55]} · {tp['tour']}</div>
+                <ul style="margin:5px 0 0;padding-left:16px;font-size:11px;color:#555;">{bullet_items}</ul>
+              </td>
+              <td style="padding:10px;text-align:center;vertical-align:top;">
+                <span style="background:#3949ab;color:#fff;padding:4px 8px;border-radius:10px;font-size:12px;font-weight:bold;">{int(tp['yes']*100)}¢</span>
+                <div style="font-size:10px;color:#888;margin-top:3px;">Kalshi price</div>
+              </td>
+              <td style="padding:10px;text-align:center;vertical-align:top;">
+                <div style="font-weight:bold;color:#1b5e20;font-size:13px;">+{edge_pct}¢</div>
+                <div style="font-size:10px;color:#aaa;">edge</div>
+                <div style="font-size:10px;color:#555;margin-top:2px;">{model_pct}% vs {market_pct}%</div>
+              </td>
+            </tr>"""
+        tennis_html = f"""
+        <div style="margin-top:24px;">
+          <div style="background:#283593;padding:14px 16px;border-radius:8px 8px 0 0;">
+            <h2 style="color:#fff;margin:0;font-size:18px;">🎾 Tennis Picks</h2>
+            <p style="color:#9fa8da;margin:4px 0 0;font-size:13px;">Surface-blended Elo + serve/return stats + H2H · Minimum +5¢ model edge</p>
+          </div>
+          <table style="width:100%;border-collapse:collapse;background:#fff;border:1px solid #c5cae9;">
+            <tbody>{tennis_rows}</tbody>
+          </table>
+          <div style="background:#e8eaf6;padding:10px 14px;border-radius:0 0 8px 8px;font-size:11px;color:#283593;">
+            Model accuracy ceiling: ~70% (pre-match). Only bet when model edge ≥5¢. Treat as high-variance picks.
+          </div>
+        </div>"""
+
     # ── Rules reminder ────────────────────────────────────────────────────────
     rules_html = """
         <div style="margin-top:20px;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:14px;">
@@ -1781,6 +1822,7 @@ def send_email(subject: str, picks: list, parlay: dict | None = None, fades: lis
       </table>
       {parlay_html}
       {fades_html}
+      {tennis_html}
       {roi_html}
       {rules_html}
       <div style="background:#f8f9fa;padding:10px;border-radius:0 0 8px 8px;font-size:11px;color:#aaa;margin-top:4px;">
@@ -1802,6 +1844,518 @@ def send_email(subject: str, picks: list, parlay: dict | None = None, fades: lis
     print(f"Email sent! ID: {resp.json().get('id')}")
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# TENNIS ENGINE
+# Research basis:
+#   • Bunker et al. 2024: pre-match ceiling ~70%, Elo best single predictor
+#   • Kovalchik 2021: surface-blended Elo (50/50 overall+surface) best AUC
+#   • Kokta: 1st serve win % most important feature (0.33–0.36 RF importance)
+#   • Sipko & Knottenbelt 2015: 4.35% ROI achievable with serve+Elo model
+#   • Sackmann ATP/WTA CSVs: free per-match serve/return integer stats 1991–present
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Surface types by tournament keyword (covers ATP+WTA 250/500/1000+GS+Challenger)
+TOURNAMENT_SURFACES = {
+    # Clay
+    "houston": "Clay", "monte carlo": "Clay", "monte-carlo": "Clay",
+    "madrid": "Clay", "rome": "Clay", "roland garros": "Clay",
+    "barcelona": "Clay", "geneva": "Clay", "lyon": "Clay",
+    "marrakech": "Clay", "estoril": "Clay", "bucharest": "Clay",
+    "hamburg": "Clay", "kitzbuhel": "Clay", "umag": "Clay",
+    "gstaad": "Clay", "bastad": "Clay", "stuttgart clay": "Clay",
+    "prague": "Clay", "budapest": "Clay", "bogota": "Clay",
+    "buenos aires": "Clay", "rio": "Clay", "sao paulo": "Clay",
+    "santiago": "Clay", "cordoba": "Clay", "french open": "Clay",
+    # Grass
+    "wimbledon": "Grass", "queens": "Grass", "halle": "Grass",
+    "eastbourne": "Grass", "newport": "Grass", "s-hertogenbosch": "Grass",
+    "hertogenbosch": "Grass", "birmingham": "Grass", "bad homburg": "Grass",
+    "nottingham": "Grass", "surbiton": "Grass",
+    # Hard (outdoor)
+    "australian open": "Hard", "us open": "Hard", "miami": "Hard",
+    "indian wells": "Hard", "cincinnati": "Hard", "montreal": "Hard",
+    "toronto": "Hard", "beijing": "Hard", "shanghai": "Hard",
+    "dubai": "Hard", "doha": "Hard", "acapulco": "Hard",
+    "los cabos": "Hard", "winston-salem": "Hard", "winston salem": "Hard",
+    "washington": "Hard", "atlanta": "Hard", "new york": "Hard",
+    "tokyo": "Hard", "seoul": "Hard", "nur-sultan": "Hard",
+    "astana": "Hard", "tashkent": "Hard", "guadalajara": "Hard",
+    "san diego": "Hard", "orlando": "Hard", "dallas": "Hard",
+    "delray beach": "Hard", "stanford": "Hard", "san jose": "Hard",
+    "cleveland": "Hard", "chicago": "Hard", "austin": "Hard",
+    # Hard (indoor)
+    "rotterdam": "Hard", "montpellier": "Hard", "marseille": "Hard",
+    "sofia": "Hard", "vienna": "Hard", "basel": "Hard",
+    "paris": "Hard", "st. petersburg": "Hard", "metz": "Hard",
+    "antwerp": "Hard", "moscow": "Hard", "stockholm": "Hard",
+    "cologne": "Hard", "london": "Hard", "atp finals": "Hard",
+    "nitto": "Hard", "wta finals": "Hard",
+}
+
+# Sackmann GitHub raw CSV URLs — fetched once per run, cached
+_SACKMANN_BASE = "https://raw.githubusercontent.com/JeffSackmann/tennis_atp/master"
+_SACKMANN_WTA  = "https://raw.githubusercontent.com/JeffSackmann/tennis_wta/master"
+_tennis_df_cache: dict = {}
+
+
+def _fetch_sackmann_csv(tour: str, year: int):
+    """Fetch one year's Sackmann CSV and return as a list of dicts."""
+    key = f"sackmann_{tour}_{year}"
+    if key in _tennis_df_cache:
+        return _tennis_df_cache[key]
+    base = _SACKMANN_BASE if tour == "atp" else _SACKMANN_WTA
+    url  = f"{base}/{tour}_matches_{year}.csv"
+    try:
+        resp = requests.get(url, timeout=10)
+        if resp.status_code != 200:
+            _tennis_df_cache[key] = []
+            return []
+        rows = []
+        lines = resp.text.splitlines()
+        if not lines:
+            _tennis_df_cache[key] = []
+            return []
+        headers = lines[0].split(",")
+        for line in lines[1:]:
+            vals = line.split(",")
+            if len(vals) == len(headers):
+                rows.append(dict(zip(headers, vals)))
+        _tennis_df_cache[key] = rows
+        return rows
+    except Exception:
+        _tennis_df_cache[key] = []
+        return []
+
+
+def _get_tennis_rows(tour: str, years: int = 5) -> list:
+    """Return all match rows for the past N years, combined."""
+    current_year = datetime.datetime.utcnow().year
+    rows = []
+    for yr in range(current_year - years + 1, current_year + 1):
+        rows.extend(_fetch_sackmann_csv(tour, yr))
+    return rows
+
+
+def _safe_float(val, default=0.0):
+    try:
+        return float(val) if val not in (None, "", "nan") else default
+    except (ValueError, TypeError):
+        return default
+
+
+def _build_tennis_elo(rows: list) -> dict:
+    """
+    Build overall + surface-specific Elo from historical match rows.
+    Returns {player_name: {"overall": elo, "Hard": elo, "Clay": elo, "Grass": elo}}
+    Processes chronologically — Sackmann rows are already in date order per file.
+    """
+    elo: dict = {}     # {name: {overall, Hard, Clay, Grass}}
+    K = 32
+    INIT = 1500
+
+    def get_elo(name, surface):
+        if name not in elo:
+            elo[name] = {"overall": INIT, "Hard": INIT, "Clay": INIT, "Grass": INIT}
+        return elo[name]["overall"], elo[name].get(surface, INIT)
+
+    for row in rows:
+        winner = row.get("winner_name", "")
+        loser  = row.get("loser_name", "")
+        surface = row.get("surface", "Hard") or "Hard"
+        if surface not in ("Hard", "Clay", "Grass"):
+            surface = "Hard"
+        if not winner or not loser:
+            continue
+
+        wo, ws = get_elo(winner, surface)
+        lo, ls = get_elo(loser, surface)
+
+        # Surface-blended Elo for expected score
+        w_blend = 0.5 * wo + 0.5 * ws
+        l_blend = 0.5 * lo + 0.5 * ls
+        exp_w = 1.0 / (1.0 + 10 ** ((l_blend - w_blend) / 400))
+
+        # Update overall and surface Elo
+        elo[winner]["overall"] += K * (1.0 - (1.0 / (1.0 + 10 ** ((lo - wo) / 400))))
+        elo[loser]["overall"]  += K * (0.0 - (1.0 / (1.0 + 10 ** ((wo - lo) / 400))))
+        elo[winner][surface]   += K * (1.0 - exp_w)
+        elo[loser][surface]    += K * (0.0 - exp_w)
+
+    return elo
+
+
+def _get_player_rolling_stats(rows: list, player: str, surface: str,
+                               n: int = 15, decay: float = 0.9) -> dict | None:
+    """
+    Compute EWMA-weighted rolling serve+return stats for a player on a surface.
+    Falls back to all surfaces if fewer than 5 surface-specific matches found.
+    Returns None if no data at all.
+    """
+    def _is_player(row):
+        return row.get("winner_name") == player or row.get("loser_name") == player
+
+    # Surface-specific first
+    surf_rows = [r for r in rows if _is_player(r) and r.get("surface") == surface]
+    if len(surf_rows) < 5:
+        surf_rows = [r for r in rows if _is_player(r)]   # all surfaces fallback
+
+    if not surf_rows:
+        return None
+
+    # Most-recent N matches
+    recent = surf_rows[-n:] if len(surf_rows) >= n else surf_rows
+    recent = list(reversed(recent))   # most recent first
+
+    weights = [decay ** i for i in range(len(recent))]
+    total_w = sum(weights)
+    if total_w == 0:
+        return None
+
+    stats_accum = {
+        "first_serve_win_pct": 0.0,
+        "second_serve_win_pct": 0.0,
+        "bp_save_pct": 0.0,
+        "ret_first_win_pct": 0.0,
+        "ret_second_win_pct": 0.0,
+        "win_rate": 0.0,
+    }
+    valid_w = 0.0
+
+    for row, w in zip(recent, weights):
+        is_winner = row.get("winner_name") == player
+        p = "w_" if is_winner else "l_"
+        o = "l_" if is_winner else "w_"
+
+        svpt  = _safe_float(row.get(f"{p}svpt"))
+        f_in  = _safe_float(row.get(f"{p}1stIn"))
+        f_won = _safe_float(row.get(f"{p}1stWon"))
+        s_won = _safe_float(row.get(f"{p}2ndWon"))
+        bp_s  = _safe_float(row.get(f"{p}bpSaved"))
+        bp_f  = _safe_float(row.get(f"{p}bpFaced"))
+
+        o_svpt  = _safe_float(row.get(f"{o}svpt"))
+        o_f_in  = _safe_float(row.get(f"{o}1stIn"))
+        o_f_won = _safe_float(row.get(f"{o}1stWon"))
+        o_s_won = _safe_float(row.get(f"{o}2ndWon"))
+
+        if svpt <= 0 or o_svpt <= 0:
+            continue
+
+        s_in = max(svpt - f_in, 0)
+        stats_accum["first_serve_win_pct"]  += w * (f_won / f_in if f_in > 0 else 0.65)
+        stats_accum["second_serve_win_pct"] += w * (s_won / s_in if s_in > 0 else 0.50)
+        stats_accum["bp_save_pct"]          += w * (bp_s / bp_f if bp_f > 0 else 0.65)
+
+        o_s_in = max(o_svpt - o_f_in, 0)
+        stats_accum["ret_first_win_pct"]    += w * (1 - (o_f_won / o_f_in) if o_f_in > 0 else 0.30)
+        stats_accum["ret_second_win_pct"]   += w * (1 - (o_s_won / o_s_in) if o_s_in > 0 else 0.50)
+        stats_accum["win_rate"]             += w * (1.0 if is_winner else 0.0)
+        valid_w += w
+
+    if valid_w == 0:
+        return None
+
+    return {k: v / valid_w for k, v in stats_accum.items()}
+
+
+def _get_h2h(rows: list, player_a: str, player_b: str, surface: str) -> tuple[int, int]:
+    """Returns (a_wins, total) for head-to-head on this surface. Falls back to all surfaces if <3."""
+    def _h2h_filter(r, surf=None):
+        involved = {r.get("winner_name"), r.get("loser_name")} == {player_a, player_b}
+        if not involved:
+            return False
+        if surf:
+            return r.get("surface") == surf
+        return True
+
+    surf_matches = [r for r in rows if _h2h_filter(r, surface)]
+    if len(surf_matches) < 3:
+        surf_matches = [r for r in rows if _h2h_filter(r)]  # all surfaces fallback
+
+    total = len(surf_matches)
+    a_wins = sum(1 for r in surf_matches if r.get("winner_name") == player_a)
+    return a_wins, total
+
+
+def _tournament_surface(tourney_name: str) -> str:
+    """Derive surface from tournament name string using keyword lookup."""
+    name = tourney_name.lower()
+    for keyword, surface in TOURNAMENT_SURFACES.items():
+        if keyword in name:
+            return surface
+    return "Hard"   # default to hard court if unknown
+
+
+def _player_fatigue(rows: list, player: str) -> int:
+    """Count matches played in the last 7 days from today."""
+    cutoff = datetime.datetime.utcnow().date() - datetime.timedelta(days=7)
+    count = 0
+    for row in reversed(rows):
+        if row.get("winner_name") != player and row.get("loser_name") != player:
+            continue
+        date_str = row.get("tourney_date", "")
+        try:
+            match_date = datetime.datetime.strptime(date_str, "%Y%m%d").date()
+            if match_date >= cutoff:
+                count += 1
+        except Exception:
+            pass
+    return count
+
+
+def predict_tennis_win_prob(player_a: str, player_b: str, surface: str,
+                             elo: dict, rows: list) -> dict:
+    """
+    Compute win probability for player_a using research-backed multi-factor model.
+
+    Weights (per Bunker et al. / Kovalchik / Kokta):
+      40% surface-blended Elo     — most validated single predictor
+      35% serve+return stats      — 1st serve win rate RF importance 0.33–0.36
+      15% recent form (EWMA)      — last 15 matches with 0.9 decay
+       7% H2H (surface-specific)  — only counted when ≥5 meetings
+       3% fatigue                 — matches played in last 7 days
+    """
+    ELO_INIT = 1500
+
+    # ── 1. Elo component ─────────────────────────────────────────────────────
+    ea = elo.get(player_a, {})
+    eb = elo.get(player_b, {})
+    oa = ea.get("overall", ELO_INIT)
+    ob = eb.get("overall", ELO_INIT)
+    sa = ea.get(surface, oa)
+    sb = eb.get(surface, ob)
+    ba = 0.5 * oa + 0.5 * sa
+    bb = 0.5 * ob + 0.5 * sb
+    p_elo = 1.0 / (1.0 + 10 ** ((bb - ba) / 400))
+
+    # ── 2. Serve+return stats component ──────────────────────────────────────
+    stats_a = _get_player_rolling_stats(rows, player_a, surface)
+    stats_b = _get_player_rolling_stats(rows, player_b, surface)
+    p_serve = 0.5
+    if stats_a and stats_b:
+        diff = (
+            0.40 * (stats_a["first_serve_win_pct"]  - stats_b["first_serve_win_pct"]) +
+            0.25 * (stats_a["second_serve_win_pct"] - stats_b["second_serve_win_pct"]) +
+            0.25 * (stats_a["ret_first_win_pct"]    - stats_b["ret_first_win_pct"]) +
+            0.10 * (stats_a["bp_save_pct"]          - stats_b["bp_save_pct"])
+        )
+        p_serve = 1.0 / (1.0 + 2.718 ** (-diff * 15))
+
+    # ── 3. Recent form component ──────────────────────────────────────────────
+    p_form = 0.5
+    if stats_a and stats_b:
+        wr_a = stats_a.get("win_rate", 0.5)
+        wr_b = stats_b.get("win_rate", 0.5)
+        denom = wr_a + wr_b
+        p_form = wr_a / denom if denom > 0 else 0.5
+
+    # ── 4. H2H component ─────────────────────────────────────────────────────
+    a_wins, h2h_total = _get_h2h(rows, player_a, player_b, surface)
+    p_h2h = 0.5
+    h2h_w = 0.0
+    if h2h_total >= 3:
+        p_h2h = a_wins / h2h_total
+        # Weight scales with sample: 3 games=5%, 5 games=7%, 10+ games=15% (max 20%)
+        h2h_w = min(0.05 + max(0, h2h_total - 3) * 0.02, 0.20)
+
+    # ── 5. Fatigue component ─────────────────────────────────────────────────
+    fat_a = _player_fatigue(rows, player_a)
+    fat_b = _player_fatigue(rows, player_b)
+    fatigue_adj = 0.0
+    if fat_b >= 4:
+        fatigue_adj += 0.04
+    elif fat_b == 3:
+        fatigue_adj += 0.02
+    if fat_a >= 4:
+        fatigue_adj -= 0.04
+    elif fat_a == 3:
+        fatigue_adj -= 0.02
+
+    # ── Final blend ──────────────────────────────────────────────────────────
+    base_w = 1.0 - h2h_w
+    p_base = (
+        0.40 / 0.90 * p_elo * base_w +
+        0.35 / 0.90 * p_serve * base_w +
+        0.15 / 0.90 * p_form * base_w +
+        p_h2h * h2h_w
+    )
+    p_final = max(0.05, min(0.95, p_base + fatigue_adj))
+
+    return {
+        "p_win": p_final,
+        "p_elo": round(p_elo, 3),
+        "p_serve": round(p_serve, 3),
+        "p_form": round(p_form, 3),
+        "p_h2h": round(p_h2h, 3) if h2h_w > 0 else None,
+        "h2h_total": h2h_total,
+        "fatigue_a": fat_a,
+        "fatigue_b": fat_b,
+        "stats_a": stats_a,
+        "stats_b": stats_b,
+    }
+
+
+def _fetch_tennis_markets(tour: str) -> list:
+    """
+    Fetch all open Kalshi match-winner markets for ATP or WTA.
+    Returns list of market dicts with yes_ask_dollars, title, ticker, rules_primary.
+    """
+    series = "KXATPMATCH" if tour == "atp" else "KXWTAMATCH"
+    try:
+        resp = requests.get(BASE_URL + "/markets",
+                            headers=get_headers("GET", "/markets"),
+                            params={"series_ticker": series, "status": "open", "limit": 200},
+                            timeout=10)
+        if resp.status_code == 200:
+            return resp.json().get("markets", [])
+    except Exception:
+        pass
+    return []
+
+
+def _parse_tennis_players_from_rules(rules: str) -> tuple[str, str]:
+    """
+    Extract player names from Kalshi rules_primary text.
+    Format: "If [Player A] wins the [A] vs [B] professional tennis match in..."
+    """
+    import re as _re
+    # Match: "If X wins the X vs Y professional"
+    m = _re.search(r"If (.+?) wins the (.+?) vs (.+?) professional", rules or "")
+    if m:
+        p1 = m.group(2).strip()
+        p2 = m.group(3).strip()
+        return p1, p2
+    # Fallback: find "vs" pattern
+    m2 = _re.search(r"([\w\s\.\-]+?) vs ([\w\s\.\-]+?) (?:professional|tennis)", rules or "")
+    if m2:
+        return m2.group(1).strip(), m2.group(2).strip()
+    return "", ""
+
+
+def _parse_tennis_yes_player(rules: str) -> str:
+    """Extract the player whose WIN this YES market represents."""
+    import re as _re
+    m = _re.search(r"If (.+?) wins the", rules or "")
+    return m.group(1).strip() if m else ""
+
+
+def get_tennis_picks(tour: str = "atp", min_edge: float = 0.05, max_picks: int = 3) -> list:
+    """
+    Main entry point: fetch Kalshi tennis markets, run the prediction model,
+    and return picks where our model probability exceeds the market price by min_edge.
+
+    Returns list of dicts with: player_a, player_b, surface, our_prob,
+    market_prob, edge, yes_ask, ticker, title, explanation bullets.
+    """
+    print(f"Loading {tour.upper()} Sackmann data...")
+    rows = _get_tennis_rows(tour, years=5)
+    print(f"  Loaded {len(rows)} match rows")
+    if not rows:
+        return []
+
+    print(f"  Building Elo ratings...")
+    elo = _build_tennis_elo(rows)
+    print(f"  Elo computed for {len(elo)} players")
+
+    print(f"Fetching {tour.upper()} Kalshi markets...")
+    markets = _fetch_tennis_markets(tour)
+    print(f"  Found {len(markets)} open markets")
+
+    seen_events: set = set()
+    picks = []
+
+    for mkt in markets:
+        ticker   = mkt.get("ticker", "")
+        yes_ask  = _safe_float(mkt.get("yes_ask_dollars"))
+        yes_bid  = _safe_float(mkt.get("yes_bid_dollars"))
+        rules    = mkt.get("rules_primary", "")
+        title    = mkt.get("title", ticker)
+        event_t  = mkt.get("event_ticker", ticker)
+        vol      = _safe_float(mkt.get("volume_fp"))
+
+        if yes_ask <= 0.05 or yes_ask >= 0.95:
+            continue
+        if event_t in seen_events:
+            continue
+
+        # Parse players
+        p1, p2 = _parse_tennis_players_from_rules(rules)
+        yes_player = _parse_tennis_yes_player(rules)
+        if not p1 or not p2 or not yes_player:
+            continue
+
+        # Identify which player this YES market is for
+        player_a = yes_player
+        player_b = p2 if yes_player == p1 else p1
+
+        # Determine surface from tournament name in rules/title
+        tourney_text = rules + " " + title
+        surface = _tournament_surface(tourney_text)
+
+        # Check we have enough Elo data for these players
+        if player_a not in elo and player_b not in elo:
+            continue
+
+        result = predict_tennis_win_prob(player_a, player_b, surface, elo, rows)
+        model_prob = result["p_win"]
+        market_prob = (yes_ask + yes_bid) / 2 if yes_bid > 0 else yes_ask
+        edge = model_prob - market_prob
+
+        # Only flag if we have a meaningful positive edge
+        if edge < min_edge:
+            continue
+
+        seen_events.add(event_t)
+
+        # Build explanation bullets
+        bullets = []
+        p_elo = result["p_elo"]
+        p_h2h = result.get("p_h2h")
+        fat_a = result["fatigue_a"]
+        fat_b = result["fatigue_b"]
+        sa = result.get("stats_a") or {}
+        sb = result.get("stats_b") or {}
+
+        bullets.append(f"🎾 {surface} court match")
+        bullets.append(f"📊 Model: {int(model_prob*100)}% vs Kalshi: {int(market_prob*100)}% (+{int(edge*100)}¢ edge)")
+        bullets.append(f"⚡ Elo: {int(p_elo*100)}% win prob")
+        if sa:
+            sv1 = sa.get("first_serve_win_pct", 0)
+            bullets.append(f"🎯 {player_a}: {int(sv1*100)}% 1st serve win rate (last 15)")
+        if sb:
+            sv1b = sb.get("first_serve_win_pct", 0)
+            bullets.append(f"🎯 {player_b}: {int(sv1b*100)}% 1st serve win rate (last 15)")
+        if p_h2h is not None:
+            bullets.append(f"📋 H2H: {int(p_h2h*100)}% for {player_a} ({result['h2h_total']} meetings)")
+        if fat_a >= 3:
+            bullets.append(f"😴 {player_a}: {fat_a} matches in last 7 days")
+        if fat_b >= 3:
+            bullets.append(f"😴 {player_b}: {fat_b} matches in last 7 days (their fatigue = our edge)")
+
+        picks.append({
+            "ticker":       ticker,
+            "title":        title,
+            "player_a":     player_a,
+            "player_b":     player_b,
+            "surface":      surface,
+            "yes":          yes_ask,
+            "yes_bid":      yes_bid,
+            "volume":       vol,
+            "model_prob":   model_prob,
+            "market_prob":  market_prob,
+            "edge":         edge,
+            "score":        edge * model_prob,   # rank by edge × confidence
+            "intel":        result,
+            "bullets":      bullets,
+            "tour":         tour.upper(),
+        })
+
+    picks.sort(key=lambda x: x["score"], reverse=True)
+    return picks[:max_picks]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+
 if __name__ == "__main__":
     today = datetime.datetime.utcnow().strftime("%B %d, %Y")
 
@@ -1815,7 +2369,20 @@ if __name__ == "__main__":
     if roi:
         print(f"Running ROI: {int(roi['win_rate']*100)}% WR, {roi['total_profit']:+.2f}¢ profit on {roi['total_bets']} bets")
 
-    # ── Step 2: fetch today's picks ───────────────────────────────────────
+    # ── Step 2: tennis picks (ATP + WTA) ─────────────────────────────────
+    tennis_picks = []
+    for tour in ("atp", "wta"):
+        try:
+            tennis_picks.extend(get_tennis_picks(tour, min_edge=0.05, max_picks=3))
+        except Exception as e:
+            print(f"Tennis {tour.upper()} error: {e}")
+    tennis_picks.sort(key=lambda x: x["score"], reverse=True)
+    tennis_picks = tennis_picks[:4]
+    if tennis_picks:
+        for tp in tennis_picks:
+            print(f"Tennis: BET {tp['player_a']} vs {tp['player_b']} | model {int(tp['model_prob']*100)}% vs market {int(tp['market_prob']*100)}% | +{int(tp['edge']*100)}¢ edge")
+
+    # ── Step 3: fetch today's sport picks ────────────────────────────────
     all_candidates = get_top_picks(15)
     picks = all_candidates[:5]
 
@@ -1847,4 +2414,4 @@ if __name__ == "__main__":
 
     create_github_issue(f"📊 Daily Picks — {today}", body)
     if picks:
-        send_email(f"🎯 Kalshi Top 5 Picks — {today}", picks, parlay=parlay, fades=fades, roi=roi)
+        send_email(f"🎯 Kalshi Top 5 Picks — {today}", picks, parlay=parlay, fades=fades, roi=roi, tennis_picks=tennis_picks or None)
