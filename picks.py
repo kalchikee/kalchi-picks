@@ -1033,8 +1033,7 @@ def scan_no_fades(n: int = 3) -> list:
 # OUTPUT: FORMATTING & DELIVERY
 # ─────────────────────────────────────────────────────────────────────────────
 
-TEAM_NAMES = {
-    # NBA
+NBA_TEAMS = {
     "ATL": "Atlanta Hawks", "BOS": "Boston Celtics", "BKN": "Brooklyn Nets",
     "CHA": "Charlotte Hornets", "CHI": "Chicago Bulls", "CLE": "Cleveland Cavaliers",
     "DAL": "Dallas Mavericks", "DEN": "Denver Nuggets", "DET": "Detroit Pistons",
@@ -1045,17 +1044,20 @@ TEAM_NAMES = {
     "ORL": "Orlando Magic", "PHI": "Philadelphia 76ers", "PHX": "Phoenix Suns",
     "POR": "Portland Trail Blazers", "SAC": "Sacramento Kings", "SAS": "San Antonio Spurs",
     "TOR": "Toronto Raptors", "UTA": "Utah Jazz", "WAS": "Washington Wizards",
-    # MLB
-    "ATH": "Oakland Athletics", "BAL": "Baltimore Orioles", "CHC": "Chicago Cubs",
-    "CWS": "Chicago White Sox", "CIN": "Cincinnati Reds", "COL": "Colorado Rockies",
-    "HOU": "Houston Astros", "KC": "Kansas City Royals", "LAA": "LA Angels",
-    "LAD": "LA Dodgers", "MIA": "Miami Marlins", "MIL": "Milwaukee Brewers",
+}
+MLB_TEAMS = {
+    "ATH": "Oakland Athletics", "BAL": "Baltimore Orioles", "BOS": "Boston Red Sox",
+    "CHC": "Chicago Cubs", "CWS": "Chicago White Sox", "CIN": "Cincinnati Reds",
+    "COL": "Colorado Rockies", "DET": "Detroit Tigers", "HOU": "Houston Astros",
+    "KC": "Kansas City Royals", "LAA": "LA Angels", "LAD": "LA Dodgers",
+    "MIA": "Miami Marlins", "MIL": "Milwaukee Brewers", "MIN": "Minnesota Twins",
     "NYM": "New York Mets", "NYY": "New York Yankees", "OAK": "Oakland A's",
     "PHI": "Philadelphia Phillies", "PIT": "Pittsburgh Pirates", "SD": "San Diego Padres",
     "SEA": "Seattle Mariners", "SF": "San Francisco Giants", "STL": "St. Louis Cardinals",
     "TB": "Tampa Bay Rays", "TEX": "Texas Rangers", "TOR": "Toronto Blue Jays",
     "WSH": "Washington Nationals",
-    # NHL
+}
+NHL_TEAMS = {
     "ANA": "Anaheim Ducks", "BOS": "Boston Bruins", "BUF": "Buffalo Sabres",
     "CAR": "Carolina Hurricanes", "CBJ": "Columbus Blue Jackets", "CGY": "Calgary Flames",
     "CHI": "Chicago Blackhawks", "COL": "Colorado Avalanche", "DAL": "Dallas Stars",
@@ -1066,19 +1068,30 @@ TEAM_NAMES = {
     "PIT": "Pittsburgh Penguins", "SJS": "San Jose Sharks", "STL": "St. Louis Blues",
     "TBL": "Tampa Bay Lightning", "TOR": "Toronto Maple Leafs", "VAN": "Vancouver Canucks",
     "VGK": "Vegas Golden Knights", "WPG": "Winnipeg Jets", "WSH": "Washington Capitals",
-    # NCAA
+}
+NCAA_TEAMS = {
     "DUKE": "Duke", "MICH": "Michigan", "TENN": "Tennessee", "CONN": "UConn",
     "KU": "Kansas", "ILL": "Illinois", "ARK": "Arkansas", "FLA": "Florida",
     "ARIZ": "Arizona", "MSU": "Michigan State", "ISU": "Iowa State",
     "UK": "Kentucky", "PUR": "Purdue", "UCLA": "UCLA", "ALA": "Alabama",
     "GONZ": "Gonzaga", "TEX": "Texas", "BYU": "BYU",
 }
+# Merged fallback (NHL wins conflicts — use sport-specific dicts when possible)
+TEAM_NAMES = {**NBA_TEAMS, **MLB_TEAMS, **NHL_TEAMS, **NCAA_TEAMS}
 
 
 def extract_pick(ticker: str) -> str:
     parts = ticker.split("-")
     if len(parts) >= 3:
         team_code = re.sub(r'\d+$', '', parts[-1].upper())
+        if "NHL" in ticker:
+            return NHL_TEAMS.get(team_code, team_code)
+        if "MLB" in ticker:
+            return MLB_TEAMS.get(team_code, team_code)
+        if "NBA" in ticker:
+            return NBA_TEAMS.get(team_code, team_code)
+        if "NCAA" in ticker:
+            return NCAA_TEAMS.get(team_code, team_code)
         return TEAM_NAMES.get(team_code, team_code)
     return ticker
 
