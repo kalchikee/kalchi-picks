@@ -2,7 +2,7 @@ name: Daily Kalshi Picks
 
 on:
   schedule:
-    - cron: "0 12 * * *"  # 7:00 AM ET (12:00 UTC)
+    - cron: "0 11 * * *"  # 7:00 AM EDT (11:00 UTC) — adjust to 0 12 in winter (EST)
   workflow_dispatch:       # Allow manual trigger from GitHub UI
 
 jobs:
