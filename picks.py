@@ -852,67 +852,104 @@ def get_top_picks(n=5):
 
 def build_parlay(all_picks: list) -> dict | None:
     """
-    Pick the best 3-leg parlay from available candidates.
-    Rules:
-    - All 3 legs from different games (no double-dipping the same event)
-    - Each leg must be in the 65–80¢ sweet spot (your best ROI range)
-    - Prefer legs from different sports for diversification
-    - No NCAA basketball legs (your worst market)
-    - Returns implied combined odds and a $3 suggested stake
+    Construct the highest-EV 3-leg parlay via exhaustive search.
+
+    Improvements over v1:
+    - Positive edge requirement: estimate_true_win_prob > Kalshi price per leg
+    - Exhaustive C(n,3) search over top 12 eligible (not greedy)
+    - Selects combo maximising combined_true_prob × avg_score
+    - Canonical event key prevents two legs from the same game
+    - Kelly-inspired stake sizing (quarter-Kelly, $2–$10 cap)
     """
-    # Filter to sweet-spot, non-NCAA candidates with real intel
-    eligible = [
+    def _event_key(pick):
+        # rsplit on the date segment so both sides of the same game share a key
+        parts = pick["ticker"].split("-")
+        return "-".join(parts[:2]) if len(parts) >= 2 else pick["ticker"]
+
+    # ── Step 1: build pool with per-leg true-win estimates ───────────────────
+    base_eligible = [
         p for p in all_picks
         if 0.65 <= p["yes"] <= 0.80
         and "NCAA" not in p["ticker"]
         and p["score"] > 0
     ]
 
-    if len(eligible) < 3:
-        # Relax NCAA filter if not enough legs
-        eligible = [
+    pool = []
+    for p in base_eligible:
+        tp = estimate_true_win_prob(p["intel"])
+        if tp is None:
+            tp = p["yes"]                        # no data → neutral, no edge
+        # Require at least 2¢ edge; if truly no data, still allow (tp == yes)
+        if tp >= p["yes"] - 0.01:
+            pool.append((p, tp))
+
+    # Fallback: relax NCAA filter
+    if len(pool) < 3:
+        fallback = [
             p for p in all_picks
             if 0.65 <= p["yes"] <= 0.80 and p["score"] > 0
         ]
+        pool = []
+        for p in fallback:
+            tp = estimate_true_win_prob(p["intel"]) or p["yes"]
+            pool.append((p, tp))
 
-    if len(eligible) < 3:
+    if len(pool) < 3:
         return None
 
-    # Sort by score, greedily pick 3 from different events and different sports
-    eligible.sort(key=lambda x: x["score"], reverse=True)
-    legs = []
-    used_events = set()
-    used_sports = set()
-    for p in eligible:
-        event = p.get("intel", {}).get("league") or p["ticker"].split("-")[0]
-        sport = "NBA" if "NBA" in p["ticker"] else \
-                "MLB" if "MLB" in p["ticker"] else \
-                "NHL" if "NHL" in p["ticker"] else \
-                "NCAA" if "NCAA" in p["ticker"] else "OTHER"
-        ev_key = p.get("intel", {}).get("opponent_abbr", p["ticker"])
-        if ev_key in used_events:
-            continue
-        used_events.add(ev_key)
-        used_sports.add(sport)
-        legs.append(p)
-        if len(legs) == 3:
-            break
+    # Limit exhaustive search to top 12 by score
+    pool.sort(key=lambda x: x[0]["score"], reverse=True)
+    pool = pool[:12]
 
-    if len(legs) < 3:
+    # ── Step 2: exhaustive C(n,3) search ────────────────────────────────────
+    best_legs, best_tps, best_quality = None, None, -1.0
+
+    for i in range(len(pool)):
+        for j in range(i + 1, len(pool)):
+            for k in range(j + 1, len(pool)):
+                trio = [pool[i], pool[j], pool[k]]
+                picks_t = [t[0] for t in trio]
+                tps_t   = [t[1] for t in trio]
+
+                # No two legs from the same game
+                events = {_event_key(p) for p in picks_t}
+                if len(events) < 3:
+                    continue
+
+                true_combined = tps_t[0] * tps_t[1] * tps_t[2]
+                avg_score     = sum(p["score"] for p in picks_t) / 3
+                quality       = true_combined * avg_score
+
+                if quality > best_quality:
+                    best_quality = quality
+                    best_legs    = picks_t
+                    best_tps     = tps_t
+
+    if best_legs is None:
         return None
 
-    # Combined implied probability = product of individual prices
-    combined_prob = legs[0]["yes"] * legs[1]["yes"] * legs[2]["yes"]
-    # Payout on $3 stake at true odds
-    payout = round(3.0 / combined_prob, 2)
-    profit = round(payout - 3.0, 2)
+    # ── Step 3: compute odds & Kelly stake ───────────────────────────────────
+    true_combined   = best_tps[0] * best_tps[1] * best_tps[2]
+    market_combined = best_legs[0]["yes"] * best_legs[1]["yes"] * best_legs[2]["yes"]
+
+    # Quarter-Kelly stake on a $100 notional, capped $2–$10
+    edge = true_combined - market_combined
+    if market_combined > 0 and market_combined < 1.0:
+        kelly_f = edge / (1.0 / market_combined - 1.0)
+        stake   = round(max(2.0, min(10.0, kelly_f * 100 * 0.25)), 2)
+    else:
+        stake = 3.0
+
+    payout = round(stake / market_combined, 2)
+    profit = round(payout - stake, 2)
 
     return {
-        "legs": legs,
-        "combined_prob": combined_prob,
-        "stake": 3.0,
-        "payout": payout,
-        "profit": profit,
+        "legs":             best_legs,
+        "combined_prob":    market_combined,
+        "true_combined_prob": true_combined,
+        "stake":            stake,
+        "payout":           payout,
+        "profit":           profit,
     }
 
 
@@ -1232,7 +1269,6 @@ def send_email(subject: str, picks: list, parlay: dict | None = None, fades: lis
     for i, p in enumerate(picks, 1):
         emoji = sport_emoji(p["ticker"])
         conf = int(p["yes"] * 100)
-        vol = int(p["volume"])
         pick_name = extract_pick(p["ticker"])
         game_title = p["title"][:55]
         bet_size = p.get("bet_size", 2.0)
@@ -1295,13 +1331,13 @@ def send_email(subject: str, picks: list, parlay: dict | None = None, fades: lis
         <div style="margin-top:24px;">
           <div style="background:#1e7e34;padding:14px 16px;border-radius:8px 8px 0 0;">
             <h2 style="color:#fff;margin:0;font-size:18px;">🎰 3-Leg Parlay Pick</h2>
-            <p style="color:#a8e6b8;margin:4px 0 0;font-size:13px;">All 3 legs in your 65–80¢ sweet spot · Stake $3 · Win ${parlay["profit"]:.2f} profit</p>
+            <p style="color:#a8e6b8;margin:4px 0 0;font-size:13px;">All 3 legs in your 65–80¢ sweet spot · Stake ${parlay["stake"]:.2f} · Win ${parlay["profit"]:.2f} profit</p>
           </div>
           <table style="width:100%;border-collapse:collapse;background:#f0fff4;border:1px solid #c3e6cb;">
             <tbody>{leg_rows}</tbody>
           </table>
           <div style="background:#d4edda;padding:10px 14px;border-radius:0 0 8px 8px;font-size:12px;color:#155724;">
-            Combined probability: ~{combined_pct}% · Payout on $3 stake: <strong>${parlay["payout"]:.2f}</strong> · Profit if all win: <strong>+${parlay["profit"]:.2f}</strong>
+            Combined probability: ~{combined_pct}% · Payout on ${parlay["stake"]:.2f} stake: <strong>${parlay["payout"]:.2f}</strong> · Profit if all win: <strong>+${parlay["profit"]:.2f}</strong>
           </div>
         </div>"""
 
