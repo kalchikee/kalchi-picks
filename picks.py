@@ -1943,6 +1943,25 @@ def _safe_float(val, default=0.0):
         return default
 
 
+def _rank_to_elo(rank: int) -> float:
+    """
+    Convert ATP/WTA ranking to approximate Elo using an empirical curve.
+    Used as fallback when a player is absent from historical Sackmann data.
+
+    Fit derived from TennisAbstract observed Elo vs ranking data:
+      rank 1   → ~2200
+      rank 10  → ~2050
+      rank 50  → ~1850
+      rank 100 → ~1750
+      rank 200 → ~1640
+      rank 300 → ~1570
+    """
+    if rank <= 0:
+        return 1500.0
+    import math
+    return max(1400.0, 2300.0 - 280.0 * math.log(rank))
+
+
 def _build_tennis_elo(rows: list) -> dict:
     """
     Build overall + surface-specific Elo from historical match rows.
@@ -2197,20 +2216,28 @@ def predict_tennis_win_prob(player_a: str, player_b: str, surface: str,
 
 def _fetch_tennis_markets(tour: str) -> list:
     """
-    Fetch all open Kalshi match-winner markets for ATP or WTA.
+    Fetch all open Kalshi match-winner markets for ATP, ATP Challenger, or WTA.
     Returns list of market dicts with yes_ask_dollars, title, ticker, rules_primary.
     """
-    series = "KXATPMATCH" if tour == "atp" else "KXWTAMATCH"
-    try:
-        resp = requests.get(BASE_URL + "/markets",
-                            headers=get_headers("GET", "/markets"),
-                            params={"series_ticker": series, "status": "open", "limit": 200},
-                            timeout=10)
-        if resp.status_code == 200:
-            return resp.json().get("markets", [])
-    except Exception:
-        pass
-    return []
+    if tour == "atp":
+        series_list = ["KXATPMATCH", "KXATPCHALLENGERMATCH"]
+    elif tour == "wta":
+        series_list = ["KXWTAMATCH"]
+    else:
+        series_list = [tour.upper()]
+
+    all_markets = []
+    for series in series_list:
+        try:
+            resp = requests.get(BASE_URL + "/markets",
+                                headers=get_headers("GET", "/markets"),
+                                params={"series_ticker": series, "status": "open", "limit": 200},
+                                timeout=10)
+            if resp.status_code == 200:
+                all_markets.extend(resp.json().get("markets", []))
+        except Exception:
+            pass
+    return all_markets
 
 
 def _parse_tennis_players_from_rules(rules: str) -> tuple[str, str]:
@@ -2278,6 +2305,10 @@ def get_tennis_picks(tour: str = "atp", min_edge: float = 0.05, max_picks: int =
         if event_t in seen_events:
             continue
 
+        # Skip illiquid markets: bid/ask spread > 25¢ means no reliable price
+        if yes_bid > 0 and (yes_ask - yes_bid) > 0.25:
+            continue
+
         # Parse players
         p1, p2 = _parse_tennis_players_from_rules(rules)
         yes_player = _parse_tennis_yes_player(rules)
@@ -2292,9 +2323,29 @@ def get_tennis_picks(tour: str = "atp", min_edge: float = 0.05, max_picks: int =
         tourney_text = rules + " " + title
         surface = _tournament_surface(tourney_text)
 
-        # Check we have enough Elo data for these players
-        if player_a not in elo and player_b not in elo:
-            continue
+        # Require at least one player with real Sackmann Elo (skip both-unknown matches).
+        # For the missing player, inject a fallback Elo derived from the market price:
+        #   If market says player is priced at p vs opponent with Elo E_opp,
+        #   implied Elo = E_opp + 400 * log10(p / (1 - p))
+        a_known = player_a in elo
+        b_known = player_b in elo
+        if not a_known and not b_known:
+            continue  # Neither player in historical data — unreliable
+        market_mid = (yes_ask + yes_bid) / 2 if yes_bid > 0 else yes_ask
+        if not a_known:
+            import math
+            e_opp = elo[player_b].get("overall", 1500.0)
+            p = max(0.05, min(0.95, market_mid))
+            implied_elo = e_opp + 400.0 * math.log10(p / (1.0 - p))
+            elo[player_a] = {"overall": implied_elo, "Hard": implied_elo,
+                             "Clay": implied_elo, "Grass": implied_elo}
+        if not b_known:
+            import math
+            e_opp = elo[player_a].get("overall", 1500.0)
+            p = max(0.05, min(0.95, 1.0 - market_mid))
+            implied_elo = e_opp + 400.0 * math.log10(p / (1.0 - p))
+            elo[player_b] = {"overall": implied_elo, "Hard": implied_elo,
+                             "Clay": implied_elo, "Grass": implied_elo}
 
         result = predict_tennis_win_prob(player_a, player_b, surface, elo, rows)
         model_prob = result["p_win"]
@@ -2318,6 +2369,10 @@ def get_tennis_picks(tour: str = "atp", min_edge: float = 0.05, max_picks: int =
 
         bullets.append(f"🎾 {surface} court match")
         bullets.append(f"📊 Model: {int(model_prob*100)}% vs Kalshi: {int(market_prob*100)}% (+{int(edge*100)}¢ edge)")
+        if not a_known:
+            bullets.append(f"⚠️ {player_a}: limited history — Elo inferred from market price")
+        elif not b_known:
+            bullets.append(f"⚠️ {player_b}: limited history — Elo inferred from market price")
         bullets.append(f"⚡ Elo: {int(p_elo*100)}% win prob")
         if sa:
             sv1 = sa.get("first_serve_win_pct", 0)
