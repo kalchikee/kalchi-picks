@@ -455,8 +455,8 @@
     "team": "Carolina Hurricanes",
     "yes": 0.69,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.31
   },
   {
     "date": "2026-04-04",
@@ -464,8 +464,8 @@
     "team": "Philadelphia Phillies",
     "yes": 0.69,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.31
   },
   {
     "date": "2026-04-04",
@@ -473,8 +473,8 @@
     "team": "UTA",
     "yes": 0.66,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.34
   },
   {
     "date": "2026-04-04",
@@ -482,8 +482,8 @@
     "team": "Pittsburgh Penguins",
     "yes": 0.67,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.33
   },
   {
     "date": "2026-04-04",
@@ -500,8 +500,8 @@
     "team": "Carolina Hurricanes",
     "yes": 0.7,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.3
   },
   {
     "date": "2026-04-04",
@@ -509,8 +509,8 @@
     "team": "Philadelphia Phillies",
     "yes": 0.69,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.31
   },
   {
     "date": "2026-04-04",
@@ -518,8 +518,8 @@
     "team": "UTA",
     "yes": 0.67,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.33
   },
   {
     "date": "2026-04-04",
@@ -527,8 +527,8 @@
     "team": "Pittsburgh Penguins",
     "yes": 0.67,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.33
   },
   {
     "date": "2026-04-04",
@@ -536,6 +536,51 @@
     "team": "LA",
     "yes": 0.64,
     "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-05",
+    "ticker": "KXMLBGAME-26APR051335MIANYY-NYY",
+    "team": "New York Yankees",
+    "yes": 0.72,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-05",
+    "ticker": "KXNBAGAME-26APR05TORBOS-BOS",
+    "team": "Boston Celtics",
+    "yes": 0.8,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-05",
+    "ticker": "KXNHLGAME-26APR05FLAPIT-PIT",
+    "team": "Pittsburgh Penguins",
+    "yes": 0.69,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-05",
+    "ticker": "KXMLBGAME-26APR051510PHICOL-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-05",
+    "ticker": "KXMLBGAME-26APR051335LADWSH-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.66,
+    "sport": "MLB",
     "result": null,
     "profit": null
   }
