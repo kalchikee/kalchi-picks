@@ -905,8 +905,8 @@
     "team": "LA Dodgers",
     "yes": 0.66,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.34
   },
   {
     "date": "2026-04-14",
@@ -914,8 +914,8 @@
     "team": "Charlotte Hornets",
     "yes": 0.68,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.32
   },
   {
     "date": "2026-04-14",
@@ -923,8 +923,8 @@
     "team": "Pittsburgh Pirates",
     "yes": 0.62,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.62
   },
   {
     "date": "2026-04-14",
@@ -932,8 +932,8 @@
     "team": "Phoenix Suns",
     "yes": 0.6,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.6
   },
   {
     "date": "2026-04-14",
@@ -941,6 +941,51 @@
     "team": "Montreal Canadiens",
     "yes": 0.62,
     "sport": "NHL",
+    "result": "L",
+    "profit": -0.62
+  },
+  {
+    "date": "2026-04-15",
+    "ticker": "KXMLBGAME-26APR152210NYMLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.68,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-15",
+    "ticker": "KXNBAGAME-26APR15GSWLAC-LAC",
+    "team": "LA Clippers",
+    "yes": 0.67,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-15",
+    "ticker": "KXNHLGAME-26APR15SEAVGK-VGK",
+    "team": "Vegas Golden Knights",
+    "yes": 0.72,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-15",
+    "ticker": "KXMLBGAME-26APR151840WSHPIT-PIT",
+    "team": "Pittsburgh Pirates",
+    "yes": 0.63,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-15",
+    "ticker": "KXMLBGAME-26APR151915MIAATL-ATL",
+    "team": "ATL",
+    "yes": 0.61,
+    "sport": "MLB",
     "result": null,
     "profit": null
   }
