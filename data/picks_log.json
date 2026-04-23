@@ -1265,8 +1265,8 @@
     "team": "Chicago Cubs",
     "yes": 0.62,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.38
   },
   {
     "date": "2026-04-22",
@@ -1274,8 +1274,8 @@
     "team": "San Diego Padres",
     "yes": 0.6,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.6
   },
   {
     "date": "2026-04-22",
@@ -1283,8 +1283,8 @@
     "team": "LA Dodgers",
     "yes": 0.66,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.66
   },
   {
     "date": "2026-04-22",
@@ -1292,14 +1292,59 @@
     "team": "Detroit Pistons",
     "yes": 0.78,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.22
   },
   {
     "date": "2026-04-22",
     "ticker": "KXMLBGAME-26APR221845ATLWSH-ATL",
     "team": "ATL",
     "yes": 0.58,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.42
+  },
+  {
+    "date": "2026-04-23",
+    "ticker": "KXMLBGAME-26APR231310MILDET-DET",
+    "team": "Detroit Tigers",
+    "yes": 0.68,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-23",
+    "ticker": "KXMLBGAME-26APR231510SDCOL-SD",
+    "team": "San Diego Padres",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-23",
+    "ticker": "KXMLBGAME-26APR231810NYYBOS-NYY",
+    "team": "New York Yankees",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-23",
+    "ticker": "KXNBAGAME-26APR23CLETOR-CLE",
+    "team": "Cleveland Cavaliers",
+    "yes": 0.59,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-23",
+    "ticker": "KXMLBGAME-26APR231545LADSF-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.6,
     "sport": "MLB",
     "result": null,
     "profit": null
