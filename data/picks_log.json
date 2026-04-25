@@ -1355,8 +1355,8 @@
     "team": "New York Yankees",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.42
   },
   {
     "date": "2026-04-24",
@@ -1364,8 +1364,8 @@
     "team": "Boston Celtics",
     "yes": 0.73,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.73
   },
   {
     "date": "2026-04-24",
@@ -1373,8 +1373,8 @@
     "team": "ATL",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.42
   },
   {
     "date": "2026-04-24",
@@ -1382,14 +1382,59 @@
     "team": "Houston Rockets",
     "yes": 0.74,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.74
   },
   {
     "date": "2026-04-24",
     "ticker": "KXMLBGAME-26APR242005ATHTEX-TEX",
     "team": "Texas Rangers",
     "yes": 0.59,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.59
+  },
+  {
+    "date": "2026-04-25",
+    "ticker": "KXNBAGAME-26APR25OKCPHX-OKC",
+    "team": "Oklahoma City Thunder",
+    "yes": 0.79,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-25",
+    "ticker": "KXMLBGAME-26APR251910NYYHOU-NYY",
+    "team": "New York Yankees",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-25",
+    "ticker": "KXMLBGAME-26APR251915CHCLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-25",
+    "ticker": "KXMLBGAME-26APR251610COLNYM-NYM",
+    "team": "New York Mets",
+    "yes": 0.65,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-25",
+    "ticker": "KXMLBGAME-26APR251415SEASTL-SEA",
+    "team": "Seattle Mariners",
+    "yes": 0.58,
     "sport": "MLB",
     "result": null,
     "profit": null
