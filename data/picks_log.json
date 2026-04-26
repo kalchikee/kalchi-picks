@@ -1400,8 +1400,8 @@
     "team": "Oklahoma City Thunder",
     "yes": 0.79,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.21
   },
   {
     "date": "2026-04-25",
@@ -1409,8 +1409,8 @@
     "team": "New York Yankees",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.42
   },
   {
     "date": "2026-04-25",
@@ -1418,8 +1418,8 @@
     "team": "LA Dodgers",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.42
   },
   {
     "date": "2026-04-25",
@@ -1427,8 +1427,8 @@
     "team": "New York Mets",
     "yes": 0.65,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.65
   },
   {
     "date": "2026-04-25",
@@ -1436,6 +1436,51 @@
     "team": "Seattle Mariners",
     "yes": 0.58,
     "sport": "MLB",
+    "result": "W",
+    "profit": 0.42
+  },
+  {
+    "date": "2026-04-26",
+    "ticker": "KXMLBGAME-26APR261335PHIATL-ATL",
+    "team": "ATL",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-26",
+    "ticker": "KXNBAGAME-26APR26SASPOR-SAS",
+    "team": "San Antonio Spurs",
+    "yes": 0.67,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-26",
+    "ticker": "KXNBAGAME-26APR26BOSPHI-BOS",
+    "team": "Boston Celtics",
+    "yes": 0.74,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-26",
+    "ticker": "KXNHLGAME-26APR26COLLA-COL",
+    "team": "Colorado Avalanche",
+    "yes": 0.62,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-04-26",
+    "ticker": "KXNBAGAME-26APR26CLETOR-CLE",
+    "team": "Cleveland Cavaliers",
+    "yes": 0.62,
+    "sport": "NBA",
     "result": null,
     "profit": null
   }
