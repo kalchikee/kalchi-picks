@@ -1706,8 +1706,8 @@
     "team": "Carolina Hurricanes",
     "yes": 0.67,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.33
   },
   {
     "date": "2026-05-02",
@@ -1715,8 +1715,8 @@
     "team": "ATL",
     "yes": 0.69,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.31
   },
   {
     "date": "2026-05-02",
@@ -1724,8 +1724,8 @@
     "team": "New York Yankees",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.39
   },
   {
     "date": "2026-05-02",
@@ -1733,14 +1733,59 @@
     "team": "San Diego Padres",
     "yes": 0.65,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.65
   },
   {
     "date": "2026-05-02",
     "ticker": "KXMLBGAME-26MAY021420AZCHC-CHC",
     "team": "Chicago Cubs",
     "yes": 0.61,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.39
+  },
+  {
+    "date": "2026-05-03",
+    "ticker": "KXMLBGAME-26MAY031510ATLCOL-ATL",
+    "team": "ATL",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-03",
+    "ticker": "KXNHLGAME-26MAY03MINCOL-COL",
+    "team": "Colorado Avalanche",
+    "yes": 0.64,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-03",
+    "ticker": "KXMLBGAME-26MAY031335BALNYY-NYY",
+    "team": "New York Yankees",
+    "yes": 0.69,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-03",
+    "ticker": "KXMLBGAME-26MAY031420AZCHC-CHC",
+    "team": "Chicago Cubs",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-03",
+    "ticker": "KXMLBGAME-26MAY031610CWSSD-SD",
+    "team": "San Diego Padres",
+    "yes": 0.63,
     "sport": "MLB",
     "result": null,
     "profit": null
