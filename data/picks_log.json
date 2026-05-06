@@ -1841,8 +1841,8 @@
     "team": "Chicago Cubs",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.39
   },
   {
     "date": "2026-05-05",
@@ -1850,8 +1850,8 @@
     "team": "Colorado Avalanche",
     "yes": 0.65,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.35
   },
   {
     "date": "2026-05-05",
@@ -1859,8 +1859,8 @@
     "team": "LA Dodgers",
     "yes": 0.68,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.68
   },
   {
     "date": "2026-05-05",
@@ -1868,14 +1868,59 @@
     "team": "Philadelphia Phillies",
     "yes": 0.64,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.36
   },
   {
     "date": "2026-05-05",
     "ticker": "KXMLBGAME-26MAY051840BOSDET-DET",
     "team": "Detroit Tigers",
     "yes": 0.63,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.63
+  },
+  {
+    "date": "2026-05-06",
+    "ticker": "KXMLBGAME-26MAY061905TEXNYY-NYY",
+    "team": "New York Yankees",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-06",
+    "ticker": "KXMLBGAME-26MAY061940CINCHC-CHC",
+    "team": "Chicago Cubs",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-06",
+    "ticker": "KXNBAGAME-26MAY06MINSAS-SAS",
+    "team": "San Antonio Spurs",
+    "yes": 0.78,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-06",
+    "ticker": "KXNBAGAME-26MAY06PHINYK-NYK",
+    "team": "New York Knicks",
+    "yes": 0.72,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-06",
+    "ticker": "KXMLBGAME-26MAY061840ATHPHI-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.62,
     "sport": "MLB",
     "result": null,
     "profit": null
