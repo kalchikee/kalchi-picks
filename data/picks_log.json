@@ -1931,8 +1931,8 @@
     "team": "Chicago Cubs",
     "yes": 0.65,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.35
   },
   {
     "date": "2026-05-07",
@@ -1940,8 +1940,8 @@
     "team": "New York Yankees",
     "yes": 0.59,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.41
   },
   {
     "date": "2026-05-07",
@@ -1949,8 +1949,8 @@
     "team": "Carolina Hurricanes",
     "yes": 0.62,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.38
   },
   {
     "date": "2026-05-07",
@@ -1958,14 +1958,50 @@
     "team": "Detroit Pistons",
     "yes": 0.61,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.39
   },
   {
     "date": "2026-05-07",
     "ticker": "KXMLBGAME-26MAY072210STLSD-SD",
     "team": "San Diego Padres",
     "yes": 0.61,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.61
+  },
+  {
+    "date": "2026-05-08",
+    "ticker": "KXMLBGAME-26MAY081840COLPHI-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-08",
+    "ticker": "KXNBAGAME-26MAY08SASMIN-SAS",
+    "team": "San Antonio Spurs",
+    "yes": 0.65,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-08",
+    "ticker": "KXMLBGAME-26MAY082145STLSD-SD",
+    "team": "San Diego Padres",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-08",
+    "ticker": "KXMLBGAME-26MAY081907LAATOR-TOR",
+    "team": "Toronto Blue Jays",
+    "yes": 0.6,
     "sport": "MLB",
     "result": null,
     "profit": null
