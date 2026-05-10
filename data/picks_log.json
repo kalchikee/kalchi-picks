@@ -2012,8 +2012,8 @@
     "team": "Oklahoma City Thunder",
     "yes": 0.77,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.23
   },
   {
     "date": "2026-05-09",
@@ -2021,8 +2021,8 @@
     "team": "Carolina Hurricanes",
     "yes": 0.65,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.35
   },
   {
     "date": "2026-05-09",
@@ -2030,8 +2030,8 @@
     "team": "Toronto Blue Jays",
     "yes": 0.62,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.38
   },
   {
     "date": "2026-05-09",
@@ -2039,14 +2039,41 @@
     "team": "Philadelphia Phillies",
     "yes": 0.64,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.64
   },
   {
     "date": "2026-05-09",
     "ticker": "KXMLBGAME-26MAY092110ATLLAD-LAD",
     "team": "LA Dodgers",
     "yes": 0.61,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.61
+  },
+  {
+    "date": "2026-05-10",
+    "ticker": "KXMLBGAME-26MAY101335COLPHI-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.74,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-10",
+    "ticker": "KXNBAGAME-26MAY10SASMIN-SAS",
+    "team": "San Antonio Spurs",
+    "yes": 0.64,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-10",
+    "ticker": "KXMLBGAME-26MAY101340MINCLE-CLE",
+    "team": "CLE",
+    "yes": 0.59,
     "sport": "MLB",
     "result": null,
     "profit": null
