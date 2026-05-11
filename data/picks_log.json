@@ -2057,8 +2057,8 @@
     "team": "Philadelphia Phillies",
     "yes": 0.74,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.26
   },
   {
     "date": "2026-05-10",
@@ -2074,6 +2074,51 @@
     "ticker": "KXMLBGAME-26MAY101340MINCLE-CLE",
     "team": "CLE",
     "yes": 0.59,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.59
+  },
+  {
+    "date": "2026-05-11",
+    "ticker": "KXNBAGAME-26MAY11OKCLAL-OKC",
+    "team": "Oklahoma City Thunder",
+    "yes": 0.82,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-11",
+    "ticker": "KXNBAGAME-26MAY11DETCLE-CLE",
+    "team": "Cleveland Cavaliers",
+    "yes": 0.6,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-11",
+    "ticker": "KXMLBGAME-26MAY112210SFLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.63,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-11",
+    "ticker": "KXMLBGAME-26MAY111810LAACLE-CLE",
+    "team": "CLE",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-11",
+    "ticker": "KXMLBGAME-26MAY111835NYYBAL-NYY",
+    "team": "New York Yankees",
+    "yes": 0.62,
     "sport": "MLB",
     "result": null,
     "profit": null
