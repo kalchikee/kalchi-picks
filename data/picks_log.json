@@ -2354,8 +2354,8 @@
     "team": "ATL",
     "yes": 0.6,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.4
   },
   {
     "date": "2026-05-17",
@@ -2363,8 +2363,8 @@
     "team": "LA Dodgers",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.42
   },
   {
     "date": "2026-05-17",
@@ -2372,8 +2372,8 @@
     "team": "CLE",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.39
   },
   {
     "date": "2026-05-17",
@@ -2389,6 +2389,51 @@
     "ticker": "KXMLBGAME-26MAY171510AZCOL-AZ",
     "team": "AZ",
     "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-18",
+    "ticker": "KXNBAGAME-26MAY18SASOKC-OKC",
+    "team": "Oklahoma City Thunder",
+    "yes": 0.69,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-18",
+    "ticker": "KXMLBGAME-26MAY182140LADSD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-18",
+    "ticker": "KXMLBGAME-26MAY181840BALTB-TB",
+    "team": "Tampa Bay Rays",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-18",
+    "ticker": "KXMLBGAME-26MAY181845NYMWSH-NYM",
+    "team": "New York Mets",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-18",
+    "ticker": "KXMLBGAME-26MAY182140CWSSEA-SEA",
+    "team": "Seattle Mariners",
+    "yes": 0.62,
     "sport": "MLB",
     "result": null,
     "profit": null
