@@ -2606,8 +2606,8 @@
     "team": "ATL",
     "yes": 0.64,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.64
   },
   {
     "date": "2026-05-23",
@@ -2615,8 +2615,8 @@
     "team": "Carolina Hurricanes",
     "yes": 0.66,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.34
   },
   {
     "date": "2026-05-23",
@@ -2624,8 +2624,8 @@
     "team": "Philadelphia Phillies",
     "yes": 0.65,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.35
   },
   {
     "date": "2026-05-23",
@@ -2641,6 +2641,51 @@
     "ticker": "KXMLBGAME-26MAY231507PITTOR-PIT",
     "team": "Pittsburgh Pirates",
     "yes": 0.59,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.59
+  },
+  {
+    "date": "2026-05-24",
+    "ticker": "KXMLBGAME-26MAY241610ATHSD-SD",
+    "team": "San Diego Padres",
+    "yes": 0.61,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-24",
+    "ticker": "KXMLBGAME-26MAY241410LADMIL-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-24",
+    "ticker": "KXMLBGAME-26MAY241610WSHATL-ATL",
+    "team": "ATL",
+    "yes": 0.61,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-24",
+    "ticker": "KXMLBGAME-26MAY241215PITTOR-TOR",
+    "team": "Toronto Blue Jays",
+    "yes": 0.61,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-24",
+    "ticker": "KXMLBGAME-26MAY241610COLAZ-AZ",
+    "team": "AZ",
+    "yes": 0.64,
     "sport": "MLB",
     "result": null,
     "profit": null
