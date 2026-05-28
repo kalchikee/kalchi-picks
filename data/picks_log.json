@@ -2734,5 +2734,41 @@
     "sport": "MLB",
     "result": null,
     "profit": null
+  },
+  {
+    "date": "2026-05-28",
+    "ticker": "KXMLBGAME-26MAY281610ATLBOS-ATL",
+    "team": "ATL",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-28",
+    "ticker": "KXNBAGAME-26MAY28OKCSAS-SAS",
+    "team": "San Antonio Spurs",
+    "yes": 0.6,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-28",
+    "ticker": "KXMLBGAME-26MAY281410MINCWS-CWS",
+    "team": "Chicago White Sox",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-28",
+    "ticker": "KXMLBGAME-26MAY281840CHCPIT-PIT",
+    "team": "Pittsburgh Pirates",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
   }
 ]
