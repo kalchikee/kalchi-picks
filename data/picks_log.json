@@ -2777,8 +2777,8 @@
     "team": "Carolina Hurricanes",
     "yes": 0.7,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.3
   },
   {
     "date": "2026-05-29",
@@ -2786,8 +2786,8 @@
     "team": "ATL",
     "yes": 0.59,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.41
   },
   {
     "date": "2026-05-29",
@@ -2804,14 +2804,50 @@
     "team": "New York Yankees",
     "yes": 0.59,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.41
   },
   {
     "date": "2026-05-29",
     "ticker": "KXMLBGAME-26MAY292210AZSEA-SEA",
     "team": "Seattle Mariners",
     "yes": 0.59,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.41
+  },
+  {
+    "date": "2026-05-30",
+    "ticker": "KXMLBGAME-26MAY302205NYYATH-NYY",
+    "team": "New York Yankees",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-30",
+    "ticker": "KXMLBGAME-26MAY301915ATLCIN-ATL",
+    "team": "ATL",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-30",
+    "ticker": "KXMLBGAME-26MAY302210AZSEA-SEA",
+    "team": "Seattle Mariners",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-05-30",
+    "ticker": "KXMLBGAME-26MAY301610LAATB-TB",
+    "team": "Tampa Bay Rays",
+    "yes": 0.6,
     "sport": "MLB",
     "result": null,
     "profit": null
