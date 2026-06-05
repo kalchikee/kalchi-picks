@@ -3038,8 +3038,8 @@
     "team": "ATL",
     "yes": 0.65,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.65
   },
   {
     "date": "2026-06-04",
@@ -3047,8 +3047,8 @@
     "team": "Milwaukee Brewers",
     "yes": 0.64,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.64
   },
   {
     "date": "2026-06-04",
@@ -3056,8 +3056,8 @@
     "team": "Philadelphia Phillies",
     "yes": 0.65,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.35
   },
   {
     "date": "2026-06-04",
@@ -3065,8 +3065,8 @@
     "team": "LA Dodgers",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.58
   },
   {
     "date": "2026-06-04",
@@ -3074,6 +3074,51 @@
     "team": "Carolina Hurricanes",
     "yes": 0.6,
     "sport": "NHL",
+    "result": "W",
+    "profit": 0.4
+  },
+  {
+    "date": "2026-06-05",
+    "ticker": "KXNBAGAME-26JUN05NYKSAS-SAS",
+    "team": "San Antonio Spurs",
+    "yes": 0.68,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-05",
+    "ticker": "KXMLBGAME-26JUN052210LAALAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-05",
+    "ticker": "KXMLBGAME-26JUN051420SFCHC-CHC",
+    "team": "Chicago Cubs",
+    "yes": 0.61,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-05",
+    "ticker": "KXMLBGAME-26JUN052040MILCOL-MIL",
+    "team": "Milwaukee Brewers",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-05",
+    "ticker": "KXMLBGAME-26JUN051910TBMIA-TB",
+    "team": "Tampa Bay Rays",
+    "yes": 0.58,
+    "sport": "MLB",
     "result": null,
     "profit": null
   }
