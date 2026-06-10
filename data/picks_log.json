@@ -3245,13 +3245,58 @@
     "team": "ATL",
     "yes": 0.6,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.6
   },
   {
     "date": "2026-06-09",
     "ticker": "KXMLBGAME-26JUN092040CHCCOL-CHC",
     "team": "Chicago Cubs",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.59
+  },
+  {
+    "date": "2026-06-10",
+    "ticker": "KXMLBGAME-26JUN101840LADPIT-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-10",
+    "ticker": "KXMLBGAME-26JUN101940ATLCWS-ATL",
+    "team": "ATL",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-10",
+    "ticker": "KXMLBGAME-26JUN101907PHITOR-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-10",
+    "ticker": "KXMLBGAME-26JUN101840MINDET-DET",
+    "team": "Detroit Tigers",
+    "yes": 0.61,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-10",
+    "ticker": "KXMLBGAME-26JUN101310BOSTB-TB",
+    "team": "Tampa Bay Rays",
     "yes": 0.59,
     "sport": "MLB",
     "result": null,
