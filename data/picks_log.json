@@ -3326,8 +3326,8 @@
     "team": "Milwaukee Brewers",
     "yes": 0.71,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.29
   },
   {
     "date": "2026-06-12",
@@ -3344,8 +3344,8 @@
     "team": "Oakland Athletics",
     "yes": 0.64,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.36
   },
   {
     "date": "2026-06-12",
@@ -3353,14 +3353,50 @@
     "team": "Baltimore Orioles",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.42
   },
   {
     "date": "2026-06-12",
     "ticker": "KXMLBGAME-26JUN121845SEAWSH-SEA",
     "team": "Seattle Mariners",
     "yes": 0.58,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.42
+  },
+  {
+    "date": "2026-06-13",
+    "ticker": "KXNBAGAME-26JUN13NYKSAS-SAS",
+    "team": "San Antonio Spurs",
+    "yes": 0.65,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-13",
+    "ticker": "KXMLBGAME-26JUN131610LADCWS-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-13",
+    "ticker": "KXMLBGAME-26JUN132205COLATH-ATH",
+    "team": "Oakland Athletics",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-13",
+    "ticker": "KXMLBGAME-26JUN131610DETCLE-DET",
+    "team": "Detroit Tigers",
+    "yes": 0.59,
     "sport": "MLB",
     "result": null,
     "profit": null
