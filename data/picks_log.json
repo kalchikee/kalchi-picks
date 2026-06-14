@@ -3380,8 +3380,8 @@
     "team": "LA Dodgers",
     "yes": 0.66,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.34
   },
   {
     "date": "2026-06-13",
@@ -3389,14 +3389,41 @@
     "team": "Oakland Athletics",
     "yes": 0.62,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.38
   },
   {
     "date": "2026-06-13",
     "ticker": "KXMLBGAME-26JUN131610DETCLE-DET",
     "team": "Detroit Tigers",
     "yes": 0.59,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.59
+  },
+  {
+    "date": "2026-06-14",
+    "ticker": "KXMLBGAME-26JUN141505COLATH-ATH",
+    "team": "Oakland Athletics",
+    "yes": 0.63,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-14",
+    "ticker": "KXMLBGAME-26JUN141410LADCWS-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.65,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-14",
+    "ticker": "KXMLBGAME-26JUN141335SEAWSH-SEA",
+    "team": "Seattle Mariners",
+    "yes": 0.58,
     "sport": "MLB",
     "result": null,
     "profit": null
