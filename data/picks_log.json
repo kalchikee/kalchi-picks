@@ -3562,5 +3562,50 @@
     "sport": "MLB",
     "result": null,
     "profit": null
+  },
+  {
+    "date": "2026-06-19",
+    "ticker": "KXMLBGAME-26JUN191905CINNYY-NYY",
+    "team": "New York Yankees",
+    "yes": 0.72,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-19",
+    "ticker": "KXMLBGAME-26JUN192210BALLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-19",
+    "ticker": "KXMLBGAME-26JUN192140LAAATH-ATH",
+    "team": "Oakland Athletics",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-19",
+    "ticker": "KXMLBGAME-26JUN191840CWSDET-DET",
+    "team": "Detroit Tigers",
+    "yes": 0.67,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-19",
+    "ticker": "KXMLBGAME-26JUN192145MINAZ-AZ",
+    "team": "AZ",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
   }
 ]
