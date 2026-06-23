@@ -3704,8 +3704,8 @@
     "team": "LA Dodgers",
     "yes": 0.59,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.41
   },
   {
     "date": "2026-06-22",
@@ -3713,14 +3713,59 @@
     "team": "Baltimore Orioles",
     "yes": 0.6,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.4
   },
   {
     "date": "2026-06-22",
     "ticker": "KXMLBGAME-26JUN221910MILCIN-MIL",
     "team": "Milwaukee Brewers",
     "yes": 0.59,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.41
+  },
+  {
+    "date": "2026-06-23",
+    "ticker": "KXMLBGAME-26JUN231840TEXMIA-MIA",
+    "team": "Miami Marlins",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-23",
+    "ticker": "KXMLBGAME-26JUN231940LADMIN-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-23",
+    "ticker": "KXMLBGAME-26JUN231840KCTB-TB",
+    "team": "Tampa Bay Rays",
+    "yes": 0.64,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-23",
+    "ticker": "KXMLBGAME-26JUN231845PHIWSH-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-23",
+    "ticker": "KXMLBGAME-26JUN232138BALLAA-BAL",
+    "team": "Baltimore Orioles",
+    "yes": 0.6,
     "sport": "MLB",
     "result": null,
     "profit": null
