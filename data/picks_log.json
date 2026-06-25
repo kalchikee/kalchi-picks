@@ -3776,8 +3776,8 @@
     "team": "LA Dodgers",
     "yes": 0.63,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.37
   },
   {
     "date": "2026-06-24",
@@ -3785,8 +3785,8 @@
     "team": "Milwaukee Brewers",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.42
   },
   {
     "date": "2026-06-24",
@@ -3794,8 +3794,8 @@
     "team": "Detroit Tigers",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.58
   },
   {
     "date": "2026-06-24",
@@ -3811,6 +3811,51 @@
     "ticker": "KXMLBGAME-26JUN241907HOUTOR-TOR",
     "team": "Toronto Blue Jays",
     "yes": 0.6,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.6
+  },
+  {
+    "date": "2026-06-25",
+    "ticker": "KXMLBGAME-26JUN251910NYYBOS-NYY",
+    "team": "New York Yankees",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-25",
+    "ticker": "KXMLBGAME-26JUN251845PHIWSH-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.64,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-25",
+    "ticker": "KXMLBGAME-26JUN251210KCTB-TB",
+    "team": "Tampa Bay Rays",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-25",
+    "ticker": "KXMLBGAME-26JUN251907TEXTOR-TOR",
+    "team": "Toronto Blue Jays",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-25",
+    "ticker": "KXMLBGAME-26JUN251235SEAPIT-SEA",
+    "team": "Seattle Mariners",
+    "yes": 0.58,
     "sport": "MLB",
     "result": null,
     "profit": null
