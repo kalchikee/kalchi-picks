@@ -3902,8 +3902,8 @@
     "team": "LA Dodgers",
     "yes": 0.65,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.35
   },
   {
     "date": "2026-06-27",
@@ -3911,8 +3911,8 @@
     "team": "Milwaukee Brewers",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.61
   },
   {
     "date": "2026-06-27",
@@ -3920,8 +3920,8 @@
     "team": "Minnesota Twins",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.58
   },
   {
     "date": "2026-06-27",
@@ -3937,6 +3937,51 @@
     "ticker": "KXMLBGAME-26JUN271610KCCWS-CWS",
     "team": "Chicago White Sox",
     "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-28",
+    "ticker": "KXMLBGAME-26JUN281410CHCMIL-MIL",
+    "team": "Milwaukee Brewers",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-28",
+    "ticker": "KXMLBGAME-26JUN281340PHINYM-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-28",
+    "ticker": "KXMLBGAME-26JUN281335WSHBAL-BAL",
+    "team": "Baltimore Orioles",
+    "yes": 0.65,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-28",
+    "ticker": "KXMLBGAME-26JUN281340AZTB-TB",
+    "team": "Tampa Bay Rays",
+    "yes": 0.64,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-06-28",
+    "ticker": "KXMLBGAME-26JUN281410COLMIN-MIN",
+    "team": "Minnesota Twins",
+    "yes": 0.59,
     "sport": "MLB",
     "result": null,
     "profit": null
