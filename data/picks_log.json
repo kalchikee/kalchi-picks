@@ -4208,8 +4208,8 @@
     "team": "LA Dodgers",
     "yes": 0.68,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.68
   },
   {
     "date": "2026-07-05",
@@ -4217,8 +4217,8 @@
     "team": "Boston Red Sox",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.39
   },
   {
     "date": "2026-07-05",
@@ -4226,14 +4226,32 @@
     "team": "Chicago Cubs",
     "yes": 0.59,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.41
   },
   {
     "date": "2026-07-05",
     "ticker": "KXMLBGAME-26JUL051400CWSCLE-CLE",
     "team": "CLE",
     "yes": 0.58,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.58
+  },
+  {
+    "date": "2026-07-06",
+    "ticker": "KXMLBGAME-26JUL062210COLLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.67,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-06",
+    "ticker": "KXMLBGAME-26JUL061410PHIKC-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.67,
     "sport": "MLB",
     "result": null,
     "profit": null
