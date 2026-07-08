@@ -4262,8 +4262,8 @@
     "team": "LA Dodgers",
     "yes": 0.72,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.72
   },
   {
     "date": "2026-07-07",
@@ -4271,8 +4271,8 @@
     "team": "Milwaukee Brewers",
     "yes": 0.64,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.36
   },
   {
     "date": "2026-07-07",
@@ -4280,8 +4280,8 @@
     "team": "Milwaukee Brewers",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.39
   },
   {
     "date": "2026-07-07",
@@ -4289,14 +4289,50 @@
     "team": "Texas Rangers",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.39
   },
   {
     "date": "2026-07-07",
     "ticker": "KXMLBGAME-26JUL071840ATHDET-DET",
     "team": "Detroit Tigers",
     "yes": 0.63,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.37
+  },
+  {
+    "date": "2026-07-08",
+    "ticker": "KXMLBGAME-26JUL082210COLLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.69,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-08",
+    "ticker": "KXMLBGAME-26JUL081840ATHDET-DET",
+    "team": "Detroit Tigers",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-08",
+    "ticker": "KXMLBGAME-26JUL082005LAATEX-TEX",
+    "team": "Texas Rangers",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-08",
+    "ticker": "KXMLBGAME-26JUL081910KCNYM-NYM",
+    "team": "New York Mets",
+    "yes": 0.58,
     "sport": "MLB",
     "result": null,
     "profit": null
