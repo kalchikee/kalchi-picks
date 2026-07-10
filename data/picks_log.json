@@ -4352,8 +4352,8 @@
     "team": "Philadelphia Phillies",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.39
   },
   {
     "date": "2026-07-09",
@@ -4361,14 +4361,59 @@
     "team": "New York Mets",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.42
   },
   {
     "date": "2026-07-09",
     "ticker": "KXMLBGAME-26JUL091840SEAMIA-SEA",
     "team": "Seattle Mariners",
     "yes": 0.58,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.58
+  },
+  {
+    "date": "2026-07-10",
+    "ticker": "KXMLBGAME-26JUL102210AZLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.71,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-10",
+    "ticker": "KXMLBGAME-26JUL101940ATHCWS-CWS",
+    "team": "Chicago White Sox",
+    "yes": 0.61,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-10",
+    "ticker": "KXMLBGAME-26JUL102015ATLSTL-ATL",
+    "team": "ATL",
+    "yes": 0.61,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-10",
+    "ticker": "KXMLBGAME-26JUL102215COLSF-SF",
+    "team": "San Francisco Giants",
+    "yes": 0.61,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-10",
+    "ticker": "KXMLBGAME-26JUL101905KCBAL-BAL",
+    "team": "Baltimore Orioles",
+    "yes": 0.59,
     "sport": "MLB",
     "result": null,
     "profit": null
