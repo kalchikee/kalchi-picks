@@ -4424,8 +4424,8 @@
     "team": "LA Dodgers",
     "yes": 0.72,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.72
   },
   {
     "date": "2026-07-11",
@@ -4433,8 +4433,8 @@
     "team": "Minnesota Twins",
     "yes": 0.63,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.37
   },
   {
     "date": "2026-07-11",
@@ -4442,8 +4442,8 @@
     "team": "Miami Marlins",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.58
   },
   {
     "date": "2026-07-11",
@@ -4451,14 +4451,32 @@
     "team": "Baltimore Orioles",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.42
   },
   {
     "date": "2026-07-11",
     "ticker": "KXMLBGAME-26JUL111605NYYWSH-NYY",
     "team": "New York Yankees",
     "yes": 0.65,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.35
+  },
+  {
+    "date": "2026-07-12",
+    "ticker": "KXMLBGAME-26JUL121610AZLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.67,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-12",
+    "ticker": "KXMLBGAME-26JUL121335KCBAL-BAL",
+    "team": "Baltimore Orioles",
+    "yes": 0.59,
     "sport": "MLB",
     "result": null,
     "profit": null
