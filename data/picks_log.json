@@ -4541,8 +4541,8 @@
     "team": "Detroit Tigers",
     "yes": 0.6,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.6
   },
   {
     "date": "2026-07-19",
@@ -4550,13 +4550,58 @@
     "team": "Chicago Cubs",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.39
   },
   {
     "date": "2026-07-19",
     "ticker": "KXMLBGAME-26JUL191510CINCOL-CIN",
     "team": "Cincinnati Reds",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.42
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "KXMLBGAME-26JUL201940NYMMIL-MIL",
+    "team": "Milwaukee Brewers",
+    "yes": 0.67,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "KXMLBGAME-26JUL202140ATHAZ-AZ",
+    "team": "AZ",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "KXMLBGAME-26JUL202140CINSEA-SEA",
+    "team": "Seattle Mariners",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "KXMLBGAME-26JUL201910BALBOS-BOS",
+    "team": "Boston Red Sox",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "KXMLBGAME-26JUL201915SDATL-ATL",
+    "team": "ATL",
     "yes": 0.58,
     "sport": "MLB",
     "result": null,
