@@ -4676,14 +4676,59 @@
     "team": "ATL",
     "yes": 0.71,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.29
   },
   {
     "date": "2026-07-23",
     "ticker": "KXMLBGAME-26JUL231840KCDET-DET",
     "team": "Detroit Tigers",
     "yes": 0.67,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.33
+  },
+  {
+    "date": "2026-07-24",
+    "ticker": "KXMLBGAME-26JUL241840KCDET-DET",
+    "team": "Detroit Tigers",
+    "yes": 0.74,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-24",
+    "ticker": "KXMLBGAME-26JUL241610COLMIL-MIL",
+    "team": "Milwaukee Brewers",
+    "yes": 0.69,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-24",
+    "ticker": "KXMLBGAME-26JUL241910LADNYM-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-24",
+    "ticker": "KXMLBGAME-26JUL242215LAASF-SF",
+    "team": "San Francisco Giants",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-07-24",
+    "ticker": "KXMLBGAME-26JUL242015CINSTL-STL",
+    "team": "St. Louis Cardinals",
+    "yes": 0.6,
     "sport": "MLB",
     "result": null,
     "profit": null
