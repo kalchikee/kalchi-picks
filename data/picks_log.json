@@ -5117,14 +5117,59 @@
     "team": "New York Yankees",
     "yes": 0.66,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.66
   },
   {
     "date": "2026-08-03",
     "ticker": "KXMLBGAME-26AUG031940PITMIL-MIL",
     "team": "Milwaukee Brewers",
     "yes": 0.58,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.58
+  },
+  {
+    "date": "2026-08-04",
+    "ticker": "KXMLBGAME-26AUG041840WSHPHI-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.71,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-04",
+    "ticker": "KXMLBGAME-26AUG041915MIAATL-ATL",
+    "team": "ATL",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-04",
+    "ticker": "KXMLBGAME-26AUG041905STLNYY-NYY",
+    "team": "New York Yankees",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-04",
+    "ticker": "KXMLBGAME-26AUG042005LADCHC-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-04",
+    "ticker": "KXMLBGAME-26AUG041940PITMIL-MIL",
+    "team": "Milwaukee Brewers",
+    "yes": 0.61,
     "sport": "MLB",
     "result": null,
     "profit": null
