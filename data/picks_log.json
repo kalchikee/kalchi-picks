@@ -5270,8 +5270,8 @@
     "team": "Boston Red Sox",
     "yes": 0.72,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.28
   },
   {
     "date": "2026-08-07",
@@ -5279,8 +5279,8 @@
     "team": "Philadelphia Phillies",
     "yes": 0.68,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.68
   },
   {
     "date": "2026-08-07",
@@ -5288,8 +5288,8 @@
     "team": "Chicago Cubs",
     "yes": 0.62,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.38
   },
   {
     "date": "2026-08-07",
@@ -5297,14 +5297,59 @@
     "team": "New York Yankees",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.42
   },
   {
     "date": "2026-08-07",
     "ticker": "KXMLBGAME-26AUG071940MINMIL-MIL",
     "team": "Milwaukee Brewers",
     "yes": 0.63,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.63
+  },
+  {
+    "date": "2026-08-08",
+    "ticker": "KXMLBGAME-26AUG081610ATHBOS-BOS",
+    "team": "Boston Red Sox",
+    "yes": 0.72,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-08",
+    "ticker": "KXMLBGAME-26AUG081910CHCKC-CHC",
+    "team": "Chicago Cubs",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-08",
+    "ticker": "KXMLBGAME-26AUG081910MINMIL-MIL",
+    "team": "Milwaukee Brewers",
+    "yes": 0.59,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-08",
+    "ticker": "KXMLBGAME-26AUG081610LAAMIA-MIA",
+    "team": "Miami Marlins",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-08",
+    "ticker": "KXMLBGAME-26AUG081915COLSTL-STL",
+    "team": "St. Louis Cardinals",
+    "yes": 0.6,
     "sport": "MLB",
     "result": null,
     "profit": null
