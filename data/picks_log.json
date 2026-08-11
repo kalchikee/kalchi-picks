@@ -5423,8 +5423,8 @@
     "team": "Houston Astros",
     "yes": 0.6,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.4
   },
   {
     "date": "2026-08-10",
@@ -5432,14 +5432,59 @@
     "team": "Boston Red Sox",
     "yes": 0.62,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.62
   },
   {
     "date": "2026-08-10",
     "ticker": "KXMLBGAME-26AUG102210KCLAD-LAD",
     "team": "LA Dodgers",
     "yes": 0.75,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.25
+  },
+  {
+    "date": "2026-08-11",
+    "ticker": "KXMLBGAME-26AUG112145HOUSF-HOU",
+    "team": "Houston Astros",
+    "yes": 0.65,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-11",
+    "ticker": "KXMLBGAME-26AUG111845CHCWSH-CHC",
+    "team": "Chicago Cubs",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-11",
+    "ticker": "KXMLBGAME-26AUG111945PHISTL-PHI",
+    "team": "Philadelphia Phillies",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-11",
+    "ticker": "KXMLBGAME-26AUG112210KCLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.72,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-11",
+    "ticker": "KXMLBGAME-26AUG112140COLAZ-AZ",
+    "team": "AZ",
+    "yes": 0.63,
     "sport": "MLB",
     "result": null,
     "profit": null
