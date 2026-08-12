@@ -5450,8 +5450,8 @@
     "team": "Houston Astros",
     "yes": 0.65,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.65
   },
   {
     "date": "2026-08-11",
@@ -5459,8 +5459,8 @@
     "team": "Chicago Cubs",
     "yes": 0.62,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.38
   },
   {
     "date": "2026-08-11",
@@ -5468,8 +5468,8 @@
     "team": "Philadelphia Phillies",
     "yes": 0.62,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.62
   },
   {
     "date": "2026-08-11",
@@ -5477,12 +5477,57 @@
     "team": "LA Dodgers",
     "yes": 0.72,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.28
   },
   {
     "date": "2026-08-11",
     "ticker": "KXMLBGAME-26AUG112140COLAZ-AZ",
+    "team": "AZ",
+    "yes": 0.63,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-12",
+    "ticker": "KXMLBGAME-26AUG121505TBATH-TB",
+    "team": "Tampa Bay Rays",
+    "yes": 0.67,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-12",
+    "ticker": "KXMLBGAME-26AUG121915NYMATL-ATL",
+    "team": "ATL",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-12",
+    "ticker": "KXMLBGAME-26AUG121845CHCWSH-CHC",
+    "team": "Chicago Cubs",
+    "yes": 0.61,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-12",
+    "ticker": "KXMLBGAME-26AUG122210KCLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.67,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-12",
+    "ticker": "KXMLBGAME-26AUG121540COLAZ-AZ",
     "team": "AZ",
     "yes": 0.63,
     "sport": "MLB",
