@@ -6053,13 +6053,31 @@
     "team": "Boston Red Sox",
     "yes": 0.6,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.6
   },
   {
     "date": "2026-08-26",
     "ticker": "KXMLBGAME-26AUG261910MILNYM-MIL",
     "team": "Milwaukee Brewers",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.4
+  },
+  {
+    "date": "2026-08-27",
+    "ticker": "KXMLBGAME-26AUG271910MILNYM-MIL",
+    "team": "Milwaukee Brewers",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-08-27",
+    "ticker": "KXMLBGAME-26AUG271905HOUNYY-NYY",
+    "team": "New York Yankees",
     "yes": 0.6,
     "sport": "MLB",
     "result": null,
