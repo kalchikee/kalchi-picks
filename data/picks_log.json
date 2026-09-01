@@ -6224,8 +6224,8 @@
     "team": "ATL",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.61
   },
   {
     "date": "2026-08-31",
@@ -6242,8 +6242,8 @@
     "team": "Boston Red Sox",
     "yes": 0.61,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.39
   },
   {
     "date": "2026-08-31",
@@ -6251,14 +6251,59 @@
     "team": "New York Yankees",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.58
   },
   {
     "date": "2026-08-31",
     "ticker": "KXMLBGAME-26AUG312005ATHTEX-TEX",
     "team": "Texas Rangers",
     "yes": 0.68,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.32
+  },
+  {
+    "date": "2026-09-01",
+    "ticker": "KXMLBGAME-26SEP012040BALCOL-BAL",
+    "team": "Baltimore Orioles",
+    "yes": 0.58,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-01",
+    "ticker": "KXMLBGAME-26SEP011840TORCLE-CLE",
+    "team": "CLE",
+    "yes": 0.63,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-01",
+    "ticker": "KXMLBGAME-26SEP011845ATLWSH-ATL",
+    "team": "ATL",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-01",
+    "ticker": "KXMLBGAME-26SEP012005ATHTEX-TEX",
+    "team": "Texas Rangers",
+    "yes": 0.64,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-01",
+    "ticker": "KXMLBGAME-26SEP012138NYYLAA-NYY",
+    "team": "New York Yankees",
+    "yes": 0.64,
     "sport": "MLB",
     "result": null,
     "profit": null
