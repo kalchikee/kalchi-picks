@@ -6620,8 +6620,8 @@
     "team": "LA Dodgers",
     "yes": 0.73,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.27
   },
   {
     "date": "2026-09-09",
@@ -6629,8 +6629,8 @@
     "team": "Boston Red Sox",
     "yes": 0.66,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.66
   },
   {
     "date": "2026-09-09",
@@ -6638,8 +6638,8 @@
     "team": "New York Yankees",
     "yes": 0.69,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.31
   },
   {
     "date": "2026-09-09",
@@ -6647,13 +6647,31 @@
     "team": "San Diego Padres",
     "yes": 0.64,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.36
   },
   {
     "date": "2026-09-09",
     "ticker": "KXMLBGAME-26SEP091505TORATH-TOR",
     "team": "Toronto Blue Jays",
+    "yes": 0.64,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.64
+  },
+  {
+    "date": "2026-09-10",
+    "ticker": "KXMLBGAME-26SEP101905COLNYY-NYY",
+    "team": "New York Yankees",
+    "yes": 0.75,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-10",
+    "ticker": "KXMLBGAME-26SEP101305HOUPHI-PHI",
+    "team": "Philadelphia Phillies",
     "yes": 0.64,
     "sport": "MLB",
     "result": null,
