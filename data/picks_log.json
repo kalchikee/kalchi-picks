@@ -6683,8 +6683,8 @@
     "team": "LA Dodgers",
     "yes": 0.7,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.3
   },
   {
     "date": "2026-09-11",
@@ -6692,8 +6692,8 @@
     "team": "Boston Red Sox",
     "yes": 0.65,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.65
   },
   {
     "date": "2026-09-11",
@@ -6701,8 +6701,8 @@
     "team": "Milwaukee Brewers",
     "yes": 0.64,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.36
   },
   {
     "date": "2026-09-11",
@@ -6718,6 +6718,51 @@
     "ticker": "KXMLBGAME-26SEP112215SDSF-SD",
     "team": "San Diego Padres",
     "yes": 0.58,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.42
+  },
+  {
+    "date": "2026-09-12",
+    "ticker": "KXMLBGAME-26SEP121610LADMIA-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.65,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-12",
+    "ticker": "KXMLBGAME-26SEP121910CINMIL-MIL",
+    "team": "Milwaukee Brewers",
+    "yes": 0.64,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-12",
+    "ticker": "KXMLBGAME-26SEP121335NYMNYY-NYY",
+    "team": "New York Yankees",
+    "yes": 0.63,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-12",
+    "ticker": "KXMLBGAME-26SEP121605SDSF-SD",
+    "team": "San Diego Padres",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-12",
+    "ticker": "KXMLBGAME-26SEP121610KCBOS-BOS",
+    "team": "Boston Red Sox",
+    "yes": 0.65,
     "sport": "MLB",
     "result": null,
     "profit": null
