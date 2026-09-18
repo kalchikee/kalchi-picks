@@ -6944,8 +6944,8 @@
     "team": "San Diego Padres",
     "yes": 0.62,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.38
   },
   {
     "date": "2026-09-17",
@@ -6953,8 +6953,8 @@
     "team": "LA Dodgers",
     "yes": 0.62,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.38
   },
   {
     "date": "2026-09-17",
@@ -6962,14 +6962,59 @@
     "team": "Milwaukee Brewers",
     "yes": 0.58,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.58
   },
   {
     "date": "2026-09-17",
     "ticker": "KXMLBGAME-26SEP171915KCHOU-HOU",
     "team": "Houston Astros",
     "yes": 0.58,
+    "sport": "MLB",
+    "result": "W",
+    "profit": 0.42
+  },
+  {
+    "date": "2026-09-18",
+    "ticker": "KXMLBGAME-26SEP181910ATHCLE-CLE",
+    "team": "CLE",
+    "yes": 0.65,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-18",
+    "ticker": "KXMLBGAME-26SEP182215SFLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.74,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-18",
+    "ticker": "KXMLBGAME-26SEP182140MIASD-SD",
+    "team": "San Diego Padres",
+    "yes": 0.65,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-18",
+    "ticker": "KXMLBGAME-26SEP181840KCPIT-PIT",
+    "team": "Pittsburgh Pirates",
+    "yes": 0.63,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-18",
+    "ticker": "KXMLBGAME-26SEP182010SEACOL-SEA",
+    "team": "Seattle Mariners",
+    "yes": 0.63,
     "sport": "MLB",
     "result": null,
     "profit": null
