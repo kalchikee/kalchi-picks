@@ -7187,8 +7187,8 @@
     "team": "LA Dodgers",
     "yes": 0.67,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.67
   },
   {
     "date": "2026-09-23",
@@ -7196,8 +7196,8 @@
     "team": "ATL",
     "yes": 0.7,
     "sport": "MLB",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.3
   },
   {
     "date": "2026-09-23",
@@ -7205,8 +7205,8 @@
     "team": "Dallas Stars",
     "yes": 0.66,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.34
   },
   {
     "date": "2026-09-23",
@@ -7214,14 +7214,59 @@
     "team": "Anaheim Ducks",
     "yes": 0.64,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.64
   },
   {
     "date": "2026-09-23",
     "ticker": "KXMLBGAME-26SEP231940MIACHC-CHC",
     "team": "Chicago Cubs",
     "yes": 0.62,
+    "sport": "MLB",
+    "result": "L",
+    "profit": -0.62
+  },
+  {
+    "date": "2026-09-24",
+    "ticker": "KXMLBGAME-26SEP241915CINATL-ATL",
+    "team": "ATL",
+    "yes": 0.67,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-24",
+    "ticker": "KXMLBGAME-26SEP242210SDLAD-LAD",
+    "team": "LA Dodgers",
+    "yes": 0.62,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-24",
+    "ticker": "KXMLBGAME-26SEP242140LAASEA-SEA",
+    "team": "Seattle Mariners",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-24",
+    "ticker": "KXMLBGAME-26SEP241420MIACHC-CHC",
+    "team": "Chicago Cubs",
+    "yes": 0.66,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-09-24",
+    "ticker": "KXMLBGAME-26SEP241510AZCOL-AZ",
+    "team": "AZ",
+    "yes": 0.64,
     "sport": "MLB",
     "result": null,
     "profit": null
