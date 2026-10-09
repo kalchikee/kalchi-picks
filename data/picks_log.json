@@ -7709,8 +7709,8 @@
     "team": "Miami Heat",
     "yes": 0.73,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.27
   },
   {
     "date": "2026-10-08",
@@ -7718,8 +7718,8 @@
     "team": "Philadelphia 76ers",
     "yes": 0.66,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.66
   },
   {
     "date": "2026-10-08",
@@ -7736,8 +7736,8 @@
     "team": "Colorado Avalanche",
     "yes": 0.69,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.31
   },
   {
     "date": "2026-10-08",
@@ -7745,6 +7745,15 @@
     "team": "Carolina Hurricanes",
     "yes": 0.75,
     "sport": "NHL",
+    "result": "W",
+    "profit": 0.25
+  },
+  {
+    "date": "2026-10-09",
+    "ticker": "KXNBAGAME-26OCT09MEMCHI-CHI",
+    "team": "Chicago Bulls",
+    "yes": 0.58,
+    "sport": "NBA",
     "result": null,
     "profit": null
   }
