@@ -7808,8 +7808,8 @@
     "team": "Denver Nuggets",
     "yes": 0.73,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.27
   },
   {
     "date": "2026-10-11",
@@ -7817,8 +7817,8 @@
     "team": "NY Rangers",
     "yes": 0.71,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.29
   },
   {
     "date": "2026-10-11",
@@ -7826,8 +7826,8 @@
     "team": "Washington Capitals",
     "yes": 0.66,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.66
   },
   {
     "date": "2026-10-11",
@@ -7835,14 +7835,41 @@
     "team": "Carolina Hurricanes",
     "yes": 0.63,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.37
   },
   {
     "date": "2026-10-11",
     "ticker": "KXNBAGAME-26OCT11ORLCLE-CLE",
     "team": "Cleveland Cavaliers",
     "yes": 0.66,
+    "sport": "NBA",
+    "result": "W",
+    "profit": 0.34
+  },
+  {
+    "date": "2026-10-12",
+    "ticker": "KXNBAGAME-26OCT12OKCATL-ATL",
+    "team": "Atlanta Hawks",
+    "yes": 0.74,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-10-12",
+    "ticker": "KXMLBGAME-26OCT122000CLETB-TB",
+    "team": "Tampa Bay Rays",
+    "yes": 0.6,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-10-12",
+    "ticker": "KXNBAGAME-26OCT12SASUTA-SAS",
+    "team": "San Antonio Spurs",
+    "yes": 0.58,
     "sport": "NBA",
     "result": null,
     "profit": null
