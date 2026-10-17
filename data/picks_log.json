@@ -8015,8 +8015,8 @@
     "team": "Detroit Pistons",
     "yes": 0.8,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.2
   },
   {
     "date": "2026-10-16",
@@ -8024,8 +8024,8 @@
     "team": "Indiana Pacers",
     "yes": 0.76,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.76
   },
   {
     "date": "2026-10-16",
@@ -8033,8 +8033,8 @@
     "team": "Philadelphia 76ers",
     "yes": 0.69,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.69
   },
   {
     "date": "2026-10-16",
@@ -8042,8 +8042,8 @@
     "team": "LA Lakers",
     "yes": 0.67,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.67
   },
   {
     "date": "2026-10-16",
@@ -8051,6 +8051,51 @@
     "team": "Portland Trail Blazers",
     "yes": 0.62,
     "sport": "NBA",
+    "result": "L",
+    "profit": -0.62
+  },
+  {
+    "date": "2026-10-17",
+    "ticker": "KXNHLGAME-26OCT17VANTB-TB",
+    "team": "TB",
+    "yes": 0.78,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-10-17",
+    "ticker": "KXNHLGAME-26OCT17CARWPG-CAR",
+    "team": "Carolina Hurricanes",
+    "yes": 0.63,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-10-17",
+    "ticker": "KXNHLGAME-26OCT17PITVGK-VGK",
+    "team": "Vegas Golden Knights",
+    "yes": 0.68,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-10-17",
+    "ticker": "KXNHLGAME-26OCT17OTTPHI-OTT",
+    "team": "Ottawa Senators",
+    "yes": 0.58,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-10-17",
+    "ticker": "KXNHLGAME-26OCT17SEAFLA-FLA",
+    "team": "Florida Panthers",
+    "yes": 0.64,
+    "sport": "NHL",
     "result": null,
     "profit": null
   }
