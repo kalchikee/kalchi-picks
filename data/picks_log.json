@@ -8240,8 +8240,8 @@
     "team": "Oklahoma City Thunder",
     "yes": 0.74,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.26
   },
   {
     "date": "2026-10-22",
@@ -8258,8 +8258,8 @@
     "team": "Philadelphia 76ers",
     "yes": 0.59,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.41
   },
   {
     "date": "2026-10-22",
@@ -8267,8 +8267,8 @@
     "team": "Dallas Stars",
     "yes": 0.65,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.35
   },
   {
     "date": "2026-10-22",
@@ -8276,6 +8276,51 @@
     "team": "UTA",
     "yes": 0.62,
     "sport": "NHL",
+    "result": "L",
+    "profit": -0.62
+  },
+  {
+    "date": "2026-10-23",
+    "ticker": "KXMLBGAME-26OCT232000TBMIL-MIL",
+    "team": "Milwaukee Brewers",
+    "yes": 0.63,
+    "sport": "MLB",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-10-23",
+    "ticker": "KXNBAGAME-26OCT23TORWAS-TOR",
+    "team": "Toronto Raptors",
+    "yes": 0.7,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-10-23",
+    "ticker": "KXNBAGAME-26OCT23PORSAC-POR",
+    "team": "Portland Trail Blazers",
+    "yes": 0.76,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-10-23",
+    "ticker": "KXNBAGAME-26OCT23LACLAL-LAL",
+    "team": "LA Lakers",
+    "yes": 0.78,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-10-23",
+    "ticker": "KXNBAGAME-26OCT23DALIND-IND",
+    "team": "Indiana Pacers",
+    "yes": 0.68,
+    "sport": "NBA",
     "result": null,
     "profit": null
   }
