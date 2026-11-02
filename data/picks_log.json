@@ -8690,8 +8690,8 @@
     "team": "Boston Celtics",
     "yes": 0.7,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.3
   },
   {
     "date": "2026-11-01",
@@ -8699,8 +8699,8 @@
     "team": "Carolina Hurricanes",
     "yes": 0.73,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.27
   },
   {
     "date": "2026-11-01",
@@ -8708,8 +8708,8 @@
     "team": "UTA",
     "yes": 0.61,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.61
   },
   {
     "date": "2026-11-01",
@@ -8717,8 +8717,8 @@
     "team": "LA Lakers",
     "yes": 0.63,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.37
   },
   {
     "date": "2026-11-01",
@@ -8726,6 +8726,51 @@
     "team": "VILL",
     "yes": 0.76,
     "sport": "NCAA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-02",
+    "ticker": "KXNBAGAME-26NOV02SACDAL-DAL",
+    "team": "Dallas Mavericks",
+    "yes": 0.79,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-02",
+    "ticker": "KXNBAGAME-26NOV02CHIPHI-PHI",
+    "team": "Philadelphia 76ers",
+    "yes": 0.83,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-02",
+    "ticker": "KXNBAGAME-26NOV02NOPMEM-MEM",
+    "team": "Memphis Grizzlies",
+    "yes": 0.67,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-02",
+    "ticker": "KXNBAGAME-26NOV02MILMIN-MIN",
+    "team": "Minnesota Timberwolves",
+    "yes": 0.8,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-02",
+    "ticker": "KXNBAGAME-26NOV02DETCHA-DET",
+    "team": "Detroit Pistons",
+    "yes": 0.63,
+    "sport": "NBA",
     "result": null,
     "profit": null
   }
