@@ -8960,8 +8960,8 @@
     "team": "Houston Rockets",
     "yes": 0.74,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.74
   },
   {
     "date": "2026-11-07",
@@ -8969,8 +8969,8 @@
     "team": "Atlanta Hawks",
     "yes": 0.72,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.28
   },
   {
     "date": "2026-11-07",
@@ -8978,8 +8978,8 @@
     "team": "Carolina Hurricanes",
     "yes": 0.8,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.2
   },
   {
     "date": "2026-11-07",
@@ -8987,14 +8987,59 @@
     "team": "Denver Nuggets",
     "yes": 0.74,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.26
   },
   {
     "date": "2026-11-07",
     "ticker": "KXNBAGAME-26NOV07ORLGSW-GSW",
     "team": "Golden State Warriors",
     "yes": 0.69,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-08",
+    "ticker": "KXNBAGAME-26NOV08PHICHI-PHI",
+    "team": "Philadelphia 76ers",
+    "yes": 0.79,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-08",
+    "ticker": "KXNBAGAME-26NOV08BKNDAL-DAL",
+    "team": "Dallas Mavericks",
+    "yes": 0.78,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-08",
+    "ticker": "KXNBAGAME-26NOV08MIASAC-MIA",
+    "team": "Miami Heat",
+    "yes": 0.75,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-08",
+    "ticker": "KXNBAGAME-26NOV08UTAMIN-MIN",
+    "team": "Minnesota Timberwolves",
+    "yes": 0.84,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-08",
+    "ticker": "KXNBAGAME-26NOV08LALDET-DET",
+    "team": "Detroit Pistons",
+    "yes": 0.63,
     "sport": "NBA",
     "result": null,
     "profit": null
