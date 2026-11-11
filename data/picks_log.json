@@ -9095,8 +9095,8 @@
     "team": "Miami Heat",
     "yes": 0.78,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.22
   },
   {
     "date": "2026-11-10",
@@ -9113,8 +9113,8 @@
     "team": "Florida",
     "yes": 0.82,
     "sport": "NCAA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.18
   },
   {
     "date": "2026-11-10",
@@ -9122,14 +9122,59 @@
     "team": "Colorado Avalanche",
     "yes": 0.6,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.4
   },
   {
     "date": "2026-11-10",
     "ticker": "KXNCAAMBGAME-26NOV10NICHTULN-TULN",
     "team": "TULN",
     "yes": 0.77,
+    "sport": "NCAA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-11",
+    "ticker": "KXNBAGAME-26NOV11BOSTOR-BOS",
+    "team": "Boston Celtics",
+    "yes": 0.73,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-11",
+    "ticker": "KXNBAGAME-26NOV11GSWHOU-HOU",
+    "team": "Houston Rockets",
+    "yes": 0.67,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-11",
+    "ticker": "KXNHLGAME-26NOV11PHIEDM-EDM",
+    "team": "Edmonton Oilers",
+    "yes": 0.67,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-11",
+    "ticker": "KXNBAGAME-26NOV11CLENYK-NYK",
+    "team": "New York Knicks",
+    "yes": 0.63,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-11",
+    "ticker": "KXNCAAMBGAME-26NOV11USIIUIN-IUIN",
+    "team": "IUIN",
+    "yes": 0.74,
     "sport": "NCAA",
     "result": null,
     "profit": null
