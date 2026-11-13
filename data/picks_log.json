@@ -9185,8 +9185,8 @@
     "team": "Carolina Hurricanes",
     "yes": 0.73,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.27
   },
   {
     "date": "2026-11-12",
@@ -9194,8 +9194,8 @@
     "team": "Detroit Pistons",
     "yes": 0.79,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.79
   },
   {
     "date": "2026-11-12",
@@ -9203,8 +9203,8 @@
     "team": "Philadelphia 76ers",
     "yes": 0.8,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.2
   },
   {
     "date": "2026-11-12",
@@ -9212,8 +9212,8 @@
     "team": "Minnesota Timberwolves",
     "yes": 0.67,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.33
   },
   {
     "date": "2026-11-12",
@@ -9221,6 +9221,51 @@
     "team": "Dallas Stars",
     "yes": 0.62,
     "sport": "NHL",
+    "result": "L",
+    "profit": -0.62
+  },
+  {
+    "date": "2026-11-13",
+    "ticker": "KXNBAGAME-26NOV13NYKIND-NYK",
+    "team": "New York Knicks",
+    "yes": 0.72,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-13",
+    "ticker": "KXNBAGAME-26NOV13ATLCHI-ATL",
+    "team": "Atlanta Hawks",
+    "yes": 0.72,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-13",
+    "ticker": "KXNBAGAME-26NOV13OKCLAC-OKC",
+    "team": "Oklahoma City Thunder",
+    "yes": 0.73,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-13",
+    "ticker": "KXNBAGAME-26NOV13PORSAC-POR",
+    "team": "Portland Trail Blazers",
+    "yes": 0.82,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-13",
+    "ticker": "KXNBAGAME-26NOV13MILORL-ORL",
+    "team": "Orlando Magic",
+    "yes": 0.78,
+    "sport": "NBA",
     "result": null,
     "profit": null
   }
