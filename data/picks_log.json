@@ -9365,8 +9365,8 @@
     "team": "Philadelphia 76ers",
     "yes": 0.7,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.3
   },
   {
     "date": "2026-11-16",
@@ -9374,8 +9374,8 @@
     "team": "Denver Nuggets",
     "yes": 0.8,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.8
   },
   {
     "date": "2026-11-16",
@@ -9383,8 +9383,8 @@
     "team": "UTA",
     "yes": 0.75,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.75
   },
   {
     "date": "2026-11-16",
@@ -9392,8 +9392,8 @@
     "team": "Cleveland Cavaliers",
     "yes": 0.77,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.23
   },
   {
     "date": "2026-11-16",
@@ -9401,6 +9401,51 @@
     "team": "Golden State Warriors",
     "yes": 0.59,
     "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-17",
+    "ticker": "KXNBAGAME-26NOV17CHALAL-LAL",
+    "team": "LA Lakers",
+    "yes": 0.74,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-17",
+    "ticker": "KXNBAGAME-26NOV17DETSAS-SAS",
+    "team": "San Antonio Spurs",
+    "yes": 0.79,
+    "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-17",
+    "ticker": "KXNHLGAME-26NOV17NSHMIN-MIN",
+    "team": "Minnesota Wild",
+    "yes": 0.65,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-17",
+    "ticker": "KXNHLGAME-26NOV17LABOS-BOS",
+    "team": "Boston Bruins",
+    "yes": 0.6,
+    "sport": "NHL",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-17",
+    "ticker": "KXNHLGAME-26NOV17WSHTB-TB",
+    "team": "TB",
+    "yes": 0.61,
+    "sport": "NHL",
     "result": null,
     "profit": null
   }
