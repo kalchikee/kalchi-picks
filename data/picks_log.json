@@ -9770,8 +9770,8 @@
     "team": "Houston Rockets",
     "yes": 0.78,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.22
   },
   {
     "date": "2026-11-25",
@@ -9788,8 +9788,8 @@
     "team": "Memphis Grizzlies",
     "yes": 0.69,
     "sport": "NBA",
-    "result": null,
-    "profit": null
+    "result": "W",
+    "profit": 0.31
   },
   {
     "date": "2026-11-25",
@@ -9797,8 +9797,8 @@
     "team": "Boston Bruins",
     "yes": 0.6,
     "sport": "NHL",
-    "result": null,
-    "profit": null
+    "result": "L",
+    "profit": -0.6
   },
   {
     "date": "2026-11-25",
@@ -9806,6 +9806,51 @@
     "team": "New York Knicks",
     "yes": 0.59,
     "sport": "NBA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-26",
+    "ticker": "KXNCAAMBGAME-26NOV26SMCUCLA-UCLA",
+    "team": "UCLA",
+    "yes": 0.75,
+    "sport": "NCAA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-26",
+    "ticker": "KXNCAAMBGAME-26NOV26GTWNTEX-TEX",
+    "team": "Texas",
+    "yes": 0.78,
+    "sport": "NCAA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-26",
+    "ticker": "KXNCAAMBGAME-26NOV26NEOMPAC-PAC",
+    "team": "PAC",
+    "yes": 0.77,
+    "sport": "NCAA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-26",
+    "ticker": "KXNCAAMBGAME-26NOV26ARKMSU-MSU",
+    "team": "Michigan State",
+    "yes": 0.67,
+    "sport": "NCAA",
+    "result": null,
+    "profit": null
+  },
+  {
+    "date": "2026-11-26",
+    "ticker": "KXNCAAMBGAME-26NOV26TTUORE-TTU",
+    "team": "TTU",
+    "yes": 0.82,
+    "sport": "NCAA",
     "result": null,
     "profit": null
   }
